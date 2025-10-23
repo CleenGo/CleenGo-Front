@@ -1,11 +1,11 @@
----
 ## 🟩 **CleenGo-Front/README.md**
+
 ```md
 # 💚 CleenGo – Frontend (React + Vite)
 
 > Proyecto final Henry Bootcamp – Interfaz web de CleenGo.  
 > Plataforma que conecta clientes con proveedores de limpieza y mantenimiento.
----
+```
 
 ## 🚀 Tecnologías principales
 
