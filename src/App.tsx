@@ -1,10 +1,21 @@
-export default function App() {
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./components/Home";
+import LoginPage from "./pages/Home/Login/page";
+import RegisterRolePage from "./pages/Register/page";
+import RegisterClientPage from "./pages/Register/client/page";
+import RegisterFormProvider from "./components/RegisterFormProvider";
+
+
+function App() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-gray-100 to-gray-300">
-      <h1 className="text-4xl font-bold text-blue-600 mb-4">CleenGo Front</h1>
-      <p className="text-gray-700 text-lg">
-        Tailwind v4 funcionando correctamente ✨
-      </p>
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterRolePage />} />
+      <Route path="/register/client" element={<RegisterClientPage />} />
+      <Route path="/register/provider" element={<RegisterFormProvider />} />
+    </Routes>
   );
 }
+
+export default App;
