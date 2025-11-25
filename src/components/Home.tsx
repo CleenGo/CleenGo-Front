@@ -20,7 +20,7 @@ export default function HomePage() {
           Plataforma de servicio de Limpieza — Rapido, Facil y Confiable 
         </p>
 
-        <p>hola</p>
+        <p>hola mundo</p>
       </div>
     </>
   );
