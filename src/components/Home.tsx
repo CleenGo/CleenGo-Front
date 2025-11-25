@@ -19,6 +19,8 @@ export default function HomePage() {
         <p className="text-lg text-center mb-8 max-w-md">
           Plataforma de servicio de Limpieza — Rapido, Facil y Confiable 
         </p>
+
+        <p>hola mundo</p>
       </div>
     </>
   );
