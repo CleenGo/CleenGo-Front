@@ -3,14 +3,15 @@ import { createContext, useContext, useState, useEffect } from "react";
 interface User {
   id: string;
   email: string;
-  name?: string;
+  name: string;
   surname?: string;
+  profileImgUrl?: string;
 }
 
 interface AuthContextType {
   user: User | null;
   token: string | null;
-  login: (user: User, token: string) => void;
+  login: (user: any, token: string) => void; // acepta user raw
   logout: () => void;
 }
 
@@ -31,10 +32,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, []);
 
-  const login = (user: User, token: string) => {
-    setUser(user);
+  const login = (rawUser: any, token: string) => {
+
+    // 🔵 NORMALIZAR EL USUARIO AQUÍ
+    const normalizedUser: User = {
+      id: rawUser.id,
+      email: rawUser.email,
+      name: rawUser.name || rawUser.full_name || "",
+      surname: rawUser.surname || "",
+      profileImgUrl: rawUser.profileImgUrl || rawUser.avatar_url || "",
+    };
+
+    setUser(normalizedUser);
     setToken(token);
-    localStorage.setItem("user", JSON.stringify(user));
+
+    localStorage.setItem("user", JSON.stringify(normalizedUser));
     localStorage.setItem("token", token);
   };
 

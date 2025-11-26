@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { registerClient } from "../services/auth";
+import OAuthLoginButton from "./OAuthLoginButton";
 
 export default function RegisterFormClient() {
   const [form, setForm] = useState({
@@ -17,26 +18,19 @@ export default function RegisterFormClient() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // TIPAR CAMBIO DE INPUT
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     });
   };
 
-  // TIPAR SUBMIT
-  const handleSubmit = async (
-    e: React.FormEvent<HTMLFormElement>
-  ) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError("");
     setSuccess("");
 
-    // ⬇⬇ CONSTRUIR BODY SIN profileImgUrl SI VIENE VACÍO
     const bodyToSend = {
       ...form,
       profileImgUrl:
@@ -82,6 +76,11 @@ export default function RegisterFormClient() {
         >
           {loading ? "Registrando..." : "Registrarme"}
         </button>
+
+        {/* 🔵 Registro con Google / GitHub */}
+        <div className="mt-4">
+          <OAuthLoginButton role="client" />
+        </div>
 
         {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         {success && <p className="text-green-600 text-sm mt-2">{success}</p>}
