@@ -10,8 +10,7 @@ export default function Loginform() {
     const [password, setPassword] = useState("");
 
     const navigate = useNavigate();
-
-        const { login: loginContext } = useAuth();
+    const { login: loginContext } = useAuth();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -19,6 +18,7 @@ export default function Loginform() {
         try {
             const res = await login({ email, password });
 
+            // Guardamos en el contexto global
             loginContext(res.user, res.accessToken);
 
             navigate("/");
@@ -26,7 +26,6 @@ export default function Loginform() {
         } catch (error) {
             alert("Credenciales incorrectas");
         }
-
     };
 
     return (
@@ -35,7 +34,6 @@ export default function Loginform() {
                 Iniciar Sesión
             </h2>
 
-            {/* Formulario */}
             <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                 <div>
                     <label className="block text-sm font-medium mb-1">
@@ -51,7 +49,9 @@ export default function Loginform() {
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium mb-1">Contraseña</label>
+                    <label className="block text-sm font-medium mb-1">
+                        Contraseña
+                    </label>
                     <input
                         type="password"
                         placeholder="••••••••"
@@ -69,9 +69,8 @@ export default function Loginform() {
                 </button>
             </form>
 
-            {/* 🔵 GOOGLE / GITHUB / FACEBOOK (OAuth) */}
             <div className="mt-4">
-                <OAuthLoginButton />
+                <OAuthLoginButton role="client" />
             </div>
 
             <p className="text-sm text-center mt-4">

@@ -4,6 +4,7 @@ import LoginPage from "./pages/Home/Login/page";
 import RegisterRolePage from "./pages/Register/page";
 import RegisterClientPage from "./pages/Register/client/page";
 import RegisterFormProvider from "./components/RegisterFormProvider";
+import OAuthCallbackPage from "./pages/Home/OAuthCallbackPage";
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Route path="/register" element={<RegisterRolePage />} />
       <Route path="/register/client" element={<RegisterClientPage />} />
       <Route path="/register/provider" element={<RegisterFormProvider />} />
+        <Route path="/oauth/callback" element={<OAuthCallbackPage />} />
     </Routes>
   );
 }
