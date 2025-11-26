@@ -1,3 +1,4 @@
+// src/services/auth.ts
 import { http } from "./http";
 
 export interface RegisterClientRequest {
@@ -16,10 +17,9 @@ export interface LoginRequest {
   password: string;
 }
 
-
 export interface RegisterClientResponse {
   message: string;
-  user: any;      
+  user: any;
   token?: string; // Por si tu backend devuelve token
 }
 
@@ -29,8 +29,28 @@ export interface LoginResponse {
   user: any;
 }
 
+/* 🔹 NUEVO: tipos para login por terceros */
+export interface ThirdPartyLoginRequest {
+  role: "client" | "provider";
+  accessToken: string;
+  name?: string;
+  surname?: string;
+  phone?: string;
+  profileImgUrl?: string;
+}
 
-export async function registerClient(data: RegisterClientRequest) {
+// Tu back devuelve lo mismo que el login normal
+export interface ThirdPartyLoginResponse {
+  message: string;
+  accessToken: string;
+  user: any;
+}
+
+/* ----------------- FUNCIONES ----------------- */
+
+export async function registerClient(
+  data: RegisterClientRequest
+): Promise<RegisterClientResponse> {
   const response = await http.post<RegisterClientResponse>(
     "/auth/register/client",
     data
@@ -38,10 +58,21 @@ export async function registerClient(data: RegisterClientRequest) {
   return response.data;
 }
 
-export async function login(data: LoginRequest) {
-  const response = await http.post<LoginResponse>(
-    "/auth/login",
-    data
+export async function login(data: LoginRequest): Promise<LoginResponse> {
+  const response = await http.post<LoginResponse>("/auth/login", data);
+  return response.data;
+}
+
+/* 🔹 NUEVO: login/registro con Google (OAuth) */
+export async function thirdPartyLogin(
+  data: ThirdPartyLoginRequest
+): Promise<ThirdPartyLoginResponse> {
+  const { role, ...body } = data;
+
+  const response = await http.post<ThirdPartyLoginResponse>(
+    `/auth/third-party/${role}`,
+    body // { accessToken, name, surname, phone, profileImgUrl }
   );
+
   return response.data;
 }

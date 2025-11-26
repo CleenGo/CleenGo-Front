@@ -6,7 +6,6 @@ import RegisterClientPage from "./pages/Register/client/page";
 import RegisterFormProvider from "./components/RegisterFormProvider";
 import OAuthCallbackPage from "./pages/Home/OAuthCallbackPage";
 
-
 function App() {
   return (
     <Routes>
@@ -15,7 +14,7 @@ function App() {
       <Route path="/register" element={<RegisterRolePage />} />
       <Route path="/register/client" element={<RegisterClientPage />} />
       <Route path="/register/provider" element={<RegisterFormProvider />} />
-        <Route path="/oauth/callback" element={<OAuthCallbackPage />} />
+      <Route path="/oauth/callback" element={<OAuthCallbackPage />} />
     </Routes>
   );
 }
