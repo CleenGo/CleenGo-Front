@@ -1,9 +1,7 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/login/page": "app/login/page.js",
-  "/oauth/callback/page": "app/oauth/callback/page.js",
   "/page": "app/page.js",
-  "/register/client/page": "app/register/client/page.js",
-  "/register/page": "app/register/page.js",
-  "/register/provider/page": "app/register/provider/page.js"
+  "/privacidad/page": "app/privacidad/page.js",
+  "/sobre-nosotros/page": "app/sobre-nosotros/page.js",
+  "/terminos/page": "app/terminos/page.js"
 }
