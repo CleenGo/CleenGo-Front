@@ -3,6 +3,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 import Navbar from "./components/Navbar"; // 👈 IMPORTA LA NAVBAR
 
+
 export const metadata: Metadata = {
   title: "CleenGo",
   description: "Plataforma de servicio de limpieza y mantenimiento",
