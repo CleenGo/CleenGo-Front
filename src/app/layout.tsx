@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
+import Navbar from "./components/Navbar"; // 👈 IMPORTA LA NAVBAR
 
 export const metadata: Metadata = {
   title: "CleenGo",
@@ -14,8 +15,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body>
-        <Providers>{children}</Providers>
+      <body className="bg-[#F7FAFC] text-[#0C2340]">
+        <Providers>
+          <Navbar /> 
+          <main>{children}</main>
+        </Providers>
       </body>
     </html>
   );

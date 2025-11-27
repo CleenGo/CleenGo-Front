@@ -36,7 +36,8 @@ const AuthProvider = ({ children })=>{
             email: rawUser.email,
             name: rawUser.name || rawUser.full_name || "",
             surname: rawUser.surname || "",
-            profileImgUrl: rawUser.profileImgUrl || rawUser.avatar_url || ""
+            profileImgUrl: rawUser.profileImgUrl || rawUser.avatar_url || "",
+            role: rawUser.role
         };
         setUser(normalizedUser);
         setToken(token);
@@ -63,7 +64,7 @@ const AuthProvider = ({ children })=>{
         children: children
     }, void 0, false, {
         fileName: "[project]/src/app/contexts/AuthContext.tsx",
-        lineNumber: 74,
+        lineNumber: 76,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 };
