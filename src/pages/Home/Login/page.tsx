@@ -1,5 +1,4 @@
 import Loginform from "../../../components/Loginform";
-import OAuthLoginButton from "../../../components/OAuthLoginButton";
 
 export default function LoginPage() {
   return (
@@ -18,12 +17,10 @@ export default function LoginPage() {
       {/* Separador opcional */}
       <div className="my-4 text-sm text-gray-500 flex items-center gap-2">
         <span className="h-px bg-gray-300 w-16"></span>
-        O continua con
+       
         <span className="h-px bg-gray-300 w-16"></span>
       </div>
-
-      {/* Botón Google */}
-      <OAuthLoginButton role="client" />
+    
     </div>
   );
 }
