@@ -7,12 +7,15 @@ import { useAuth } from "@/app/contexts/AuthContext";
 export default function Navbar() {
   const { user, logout } = useAuth();
 
+  const role = user?.role;
+
   return (
     <nav className="w-full bg-white shadow-sm fixed top-0 left-0 flex items-center justify-between px-6 py-4 z-50">
+      
       {/* Logo */}
       <Link href="/" className="flex items-center gap-2">
         <Image
-          src="/logo-sin-fondo.png" // ajusta al nombre que tengas en /public
+          src="/logo-sin-fondo.png"
           alt="CleenGo Logo"
           width={120}
           height={48}
@@ -20,16 +23,15 @@ export default function Navbar() {
         />
       </Link>
 
-      {/* Si NO hay usuario: botones Login/Register */}
+      
+      {/* ------------------- */}
+      {/* GUEST NAVBAR       */}
+      {/* ------------------- */}
       {!user && (
         <div className="flex gap-4">
-          <Link
-            href="/login"
-            className="text-[#0C2340] font-medium hover:opacity-70 transition"
-          >
+          <Link href="/login" className="text-[#0C2340] font-medium hover:opacity-70 transition">
             Login
           </Link>
-
           <Link
             href="/register"
             className="bg-[#0A65FF] text-white px-4 py-2 rounded-lg font-medium hover:opacity-90 transition"
@@ -39,12 +41,52 @@ export default function Navbar() {
         </div>
       )}
 
-      {/* Si SÍ hay usuario: saludo + logout */}
-      {user && (
-        <div className="flex items-center gap-4">
-          <span className="text-[#0C2340] font-medium">
-            Hola, {user.name ?? user.email} 👋
-          </span>
+
+      {/* ------------------- */}
+      {/* CLIENTE NAVBAR     */}
+      {/* ------------------- */}
+      {user && role === "client" && (
+        <div className="flex items-center gap-6">
+
+          <Link href="/client/home" className="text-[#0C2340] hover:opacity-70 transition">
+            Inicio
+          </Link>
+
+          <Link href="/client/appointments" className="text-[#0C2340] hover:opacity-70 transition">
+            Proveedores
+          </Link>
+
+          <Link href="/client/profile" className="text-[#0C2340] hover:opacity-70 transition">
+            Perfil
+          </Link>
+
+          <button
+            onClick={logout}
+            className="bg-red-500 text-white px-4 py-2 rounded-lg font-medium hover:opacity-90 transition"
+          >
+            Logout
+          </button>
+        </div>
+      )}
+
+
+      {/* ------------------- */}
+      {/* PROVEEDOR NAVBAR   */}
+      {/* ------------------- */}
+      {user && role === "provider" && (
+        <div className="flex items-center gap-6">
+          
+          <Link href="/provider/dashboard" className="text-[#0C2340] hover:opacity-70 transition">
+            Dashboard
+          </Link>
+
+          <Link href="/provider/appointments" className="text-[#0C2340] hover:opacity-70 transition">
+            Servicios
+          </Link>
+
+          <Link href="/provider/profile" className="text-[#0C2340] hover:opacity-70 transition">
+            Perfil
+          </Link>
 
           <button
             onClick={logout}
@@ -57,3 +99,4 @@ export default function Navbar() {
     </nav>
   );
 }
+
