@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, ChangeEvent, FormEvent } from "react";
 import { registerClient } from "../services/auth";
 import OAuthLoginButton from "./OAuthLoginButton";
@@ -51,70 +52,113 @@ export default function RegisterFormClient() {
 
   return (
     <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
+      {/* LOGO DENTRO DEL COMPONENTE */}
+      <div className="flex justify-center mb-0">
+        <Image
+          src="/logo-vertical-sin-fondo.png"
+          alt="CleenGo Logo"
+          width={150}      // ← MÁS GRANDE
+          height={150}
+          className="object-contain"
+        />
+      </div>
       <h2 className="text-2xl font-semibold text-center mb-6">
         Registro Cliente
       </h2>
 
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <input
-          name="name"
-          onChange={handleChange}
-          placeholder="Nombre"
-          className="border rounded-lg px-3 py-2"
-        />
+        {/* NOMBRE */}
+        <div className="flex flex-col">
+          <label className="text-gray-700 text-sm font-medium mb-1">Nombre</label>
+          <input
+            name="name"
+            onChange={handleChange}
+            placeholder="Ej: Juan"
+            className="border rounded-lg px-3 py-2"
+          />
+        </div>
 
-        <input
-          name="surname"
-          onChange={handleChange}
-          placeholder="Apellido"
-          className="border rounded-lg px-3 py-2"
-        />
+        {/* APELLIDO */}
+        <div className="flex flex-col">
+          <label className="text-gray-700 text-sm font-medium mb-1">Apellido</label>
+          <input
+            name="surname"
+            onChange={handleChange}
+            placeholder="Ej: Pérez"
+            className="border rounded-lg px-3 py-2"
+          />
+        </div>
 
-        <input
-          name="email"
-          type="email"
-          onChange={handleChange}
-          placeholder="Correo"
-          className="border rounded-lg px-3 py-2"
-        />
+        {/* EMAIL */}
+        <div className="flex flex-col">
+          <label className="text-gray-700 text-sm font-medium mb-1">Correo</label>
+          <input
+            name="email"
+            type="email"
+            onChange={handleChange}
+            placeholder="Ej: juanperez@gmail.com"
+            className="border rounded-lg px-3 py-2"
+          />
+        </div>
 
-        <input
-          name="password"
-          type="password"
-          onChange={handleChange}
-          placeholder="Contraseña"
-          className="border rounded-lg px-3 py-2"
-        />
+        {/* PASSWORD */}
+        <div className="flex flex-col">
+          <label className="text-gray-700 text-sm font-medium mb-1">Contraseña</label>
+          <input
+            name="password"
+            type="password"
+            onChange={handleChange}
+            placeholder="Mínimo 8 caracteres"
+            className="border rounded-lg px-3 py-2"
+          />
+        </div>
 
-        <input
-          name="confirmPassword"
-          type="password"
-          onChange={handleChange}
-          placeholder="Confirmar contraseña"
-          className="border rounded-lg px-3 py-2"
-        />
+        {/* CONFIRM PASSWORD */}
+        <div className="flex flex-col">
+          <label className="text-gray-700 text-sm font-medium mb-1">Confirmar contraseña</label>
+          <input
+            name="confirmPassword"
+            type="password"
+            onChange={handleChange}
+            placeholder="Repite la contraseña"
+            className="border rounded-lg px-3 py-2"
+          />
+        </div>
 
-        <input
-          name="birthDate"
-          type="date"
-          onChange={handleChange}
-          className="border rounded-lg px-3 py-2"
-        />
+        {/* FECHA DE NACIMIENTO */}
+        <div className="flex flex-col">
+          <label className="text-gray-700 text-sm font-medium mb-1">Fecha de nacimiento</label>
+          <input
+            name="birthDate"
+            type="date"
+            onChange={handleChange}
+            className="border rounded-lg px-3 py-2"
+          />
+        </div>
 
-        <input
-          name="profileImgUrl"
-          onChange={handleChange}
-          placeholder="URL Imagen Perfil (opcional)"
-          className="border rounded-lg px-3 py-2"
-        />
+        {/* IMG PERFIL */}
+        <div className="flex flex-col">
+          <label className="text-gray-700 text-sm font-medium mb-1">Imagen de perfil (URL)</label>
+          <input
+            name="profileImgUrl"
+            onChange={handleChange}
+            placeholder="Ej: https://miimagen.com/foto.jpg"
+            className="border rounded-lg px-3 py-2"
+          />
+        </div>
 
-        <input
-          name="phone"
-          onChange={handleChange}
-          placeholder="Teléfono"
-          className="border rounded-lg px-3 py-2"
-        />
+        {/* TELÉFONO */}
+        <div className="flex flex-col">
+          <label className="text-gray-700 text-sm font-medium mb-1">Teléfono</label>
+          <input
+            name="phone"
+            onChange={handleChange}
+            placeholder="Ej: 987654321"
+            className="border rounded-lg px-3 py-2"
+          />
+        </div>
 
+        {/* BOTÓN */}
         <button
           disabled={loading}
           className="bg-blue-600 text-white py-2 rounded-lg hover:opacity-90 disabled:opacity-70"
@@ -132,3 +176,4 @@ export default function RegisterFormClient() {
     </div>
   );
 }
+

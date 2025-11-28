@@ -124,6 +124,8 @@ __turbopack_context__.s([
     ()=>login,
     "registerClient",
     ()=>registerClient,
+    "registerProvider",
+    ()=>registerProvider,
     "thirdPartyLogin",
     ()=>thirdPartyLogin
 ]);
@@ -135,6 +137,10 @@ async function registerClient(data) {
 }
 async function login(data) {
     const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$services$2f$http$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["http"].post("/auth/login", data);
+    return response.data;
+}
+async function registerProvider(data) {
+    const response = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$services$2f$http$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["http"].post("/auth/register/provider", data);
     return response.data;
 }
 async function thirdPartyLogin(role, data) {
