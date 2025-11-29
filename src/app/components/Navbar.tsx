@@ -10,20 +10,20 @@ export default function Navbar() {
   const role = user?.role;
 
   return (
-    <nav className="w-full bg-white shadow-sm fixed top-0 left-0 flex items-center justify-between px-6 py-4 z-50">
-      
+    <nav className="w-full bg-white shadow-sm fixed top-0 left-0 flex items-center justify-between px-6 py-2 z-50">
+
       {/* Logo */}
       <Link href="/" className="flex items-center gap-2">
         <Image
-          src="/logo-sin-fondo.png"
+          src="/logo-horizontal.svg"
           alt="CleenGo Logo"
-          width={120}
-          height={48}
-          className="h-16 w-auto"
+          width={180}  // <-- más grande
+          height={70}
+          className="h-10 w-auto"  // <-- 80px de alto, ajustable
         />
       </Link>
 
-      
+
       {/* ------------------- */}
       {/* GUEST NAVBAR       */}
       {/* ------------------- */}
@@ -75,7 +75,7 @@ export default function Navbar() {
       {/* ------------------- */}
       {user && role === "provider" && (
         <div className="flex items-center gap-6">
-          
+
           <Link href="/provider/dashboard" className="text-[#0C2340] hover:opacity-70 transition">
             Dashboard
           </Link>

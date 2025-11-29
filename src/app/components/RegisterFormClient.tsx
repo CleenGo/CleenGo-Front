@@ -5,8 +5,29 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { registerClient } from "../services/auth";
 import OAuthLoginButton from "./OAuthLoginButton";
 
+interface FormState {
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  birthDate: string;
+  profileImgUrl: string;
+  phone: string;
+}
+
+interface ErrorState {
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  birthDate: string;
+  phone: string;
+}
+
 export default function RegisterFormClient() {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<FormState>({
     name: "",
     surname: "",
     email: "",
@@ -17,21 +38,104 @@ export default function RegisterFormClient() {
     phone: "",
   });
 
+  const [errors, setErrors] = useState<ErrorState>({
+    name: "",
+    surname: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    birthDate: "",
+    phone: "",
+  });
+
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
+  // -------------------------------
+  // VALIDACIONES EN TIEMPO REAL
+  // -------------------------------
+  const validate = (field: keyof ErrorState, value: string) => {
+    let msg = "";
+
+    switch (field) {
+      case "email":
+        if (!/^\S+@\S+\.\S+$/.test(value)) msg = "Correo inválido";
+        break;
+
+      case "password":
+        const strongRegex =
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+
+        if (!strongRegex.test(value)) {
+          msg =
+            "Debe tener mayúscula, minúscula, número y símbolo, mínimo 8 caracteres";
+        }
+
+        if (form.confirmPassword && value !== form.confirmPassword) {
+          msg = "Las contraseñas no coinciden";
+        }
+        break;
+
+        
+      case "phone":
+        if (!/^\d+$/.test(value)) msg = "Solo números";
+        if (value.length < 9) msg = "Número demasiado corto";
+        break;
+
+      case "birthDate":
+        const birth = new Date(value);
+        const today = new Date();
+        const age = today.getFullYear() - birth.getFullYear();
+
+        if (!value) msg = "La fecha es obligatoria";
+        else if (age < 18 || (age === 18 && today < new Date(birth.setFullYear(birth.getFullYear() + 18))))
+          msg = "Debes ser mayor de 18 años";
+        break;
+
+      default:
+        if (!value.trim()) msg = "Campo obligatorio";
+        break;
+    }
+
+    setErrors((prev) => ({
+      ...prev,
+      [field]: msg,
+    }));
+  };
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+
+    validate(name as keyof ErrorState, value);
+  };
+
+  const allValid = () => {
+    return (
+      form.name &&
+      form.surname &&
+      form.email &&
+      form.password &&
+      form.confirmPassword &&
+      form.birthDate &&
+      form.phone &&
+      Object.values(errors).every((e) => e === "")
+    );
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!allValid()) {
+      setSuccess("");
+      return;
+    }
+
     setLoading(true);
-    setError("");
     setSuccess("");
 
     const bodyToSend = {
@@ -44,7 +148,7 @@ export default function RegisterFormClient() {
       await registerClient(bodyToSend);
       setSuccess("Cliente registrado correctamente");
     } catch (err: any) {
-      setError(err.response?.data?.message || "Error al registrarse");
+      console.log(err);
     } finally {
       setLoading(false);
     }
@@ -52,16 +156,16 @@ export default function RegisterFormClient() {
 
   return (
     <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
-      {/* LOGO DENTRO DEL COMPONENTE */}
-      <div className="flex justify-center mb-0">
+      {/* LOGO */}
+      <div className="relative w-[400px] h-[200px] mx-auto mb-1">
         <Image
-          src="/logo-vertical-sin-fondo.png"
+          src="/logo-cleengo.svg"
           alt="CleenGo Logo"
-          width={150}      // ← MÁS GRANDE
-          height={150}
+          fill
           className="object-contain"
         />
       </div>
+
       <h2 className="text-2xl font-semibold text-center mb-6">
         Registro Cliente
       </h2>
@@ -73,9 +177,9 @@ export default function RegisterFormClient() {
           <input
             name="name"
             onChange={handleChange}
-            placeholder="Ej: Juan"
             className="border rounded-lg px-3 py-2"
           />
+          {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
         </div>
 
         {/* APELLIDO */}
@@ -84,9 +188,9 @@ export default function RegisterFormClient() {
           <input
             name="surname"
             onChange={handleChange}
-            placeholder="Ej: Pérez"
             className="border rounded-lg px-3 py-2"
           />
+          {errors.surname && <p className="text-red-500 text-sm">{errors.surname}</p>}
         </div>
 
         {/* EMAIL */}
@@ -96,9 +200,9 @@ export default function RegisterFormClient() {
             name="email"
             type="email"
             onChange={handleChange}
-            placeholder="Ej: juanperez@gmail.com"
             className="border rounded-lg px-3 py-2"
           />
+          {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
         </div>
 
         {/* PASSWORD */}
@@ -108,9 +212,9 @@ export default function RegisterFormClient() {
             name="password"
             type="password"
             onChange={handleChange}
-            placeholder="Mínimo 8 caracteres"
             className="border rounded-lg px-3 py-2"
           />
+          {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
         </div>
 
         {/* CONFIRM PASSWORD */}
@@ -120,12 +224,14 @@ export default function RegisterFormClient() {
             name="confirmPassword"
             type="password"
             onChange={handleChange}
-            placeholder="Repite la contraseña"
             className="border rounded-lg px-3 py-2"
           />
+          {errors.confirmPassword && (
+            <p className="text-red-500 text-sm">{errors.confirmPassword}</p>
+          )}
         </div>
 
-        {/* FECHA DE NACIMIENTO */}
+        {/* BIRTHDATE */}
         <div className="flex flex-col">
           <label className="text-gray-700 text-sm font-medium mb-1">Fecha de nacimiento</label>
           <input
@@ -134,34 +240,25 @@ export default function RegisterFormClient() {
             onChange={handleChange}
             className="border rounded-lg px-3 py-2"
           />
+          {errors.birthDate && (
+            <p className="text-red-500 text-sm">{errors.birthDate}</p>
+          )}
         </div>
 
-        {/* IMG PERFIL */}
-        <div className="flex flex-col">
-          <label className="text-gray-700 text-sm font-medium mb-1">Imagen de perfil (URL)</label>
-          <input
-            name="profileImgUrl"
-            onChange={handleChange}
-            placeholder="Ej: https://miimagen.com/foto.jpg"
-            className="border rounded-lg px-3 py-2"
-          />
-        </div>
-
-        {/* TELÉFONO */}
+        {/* PHONE */}
         <div className="flex flex-col">
           <label className="text-gray-700 text-sm font-medium mb-1">Teléfono</label>
           <input
             name="phone"
             onChange={handleChange}
-            placeholder="Ej: 987654321"
             className="border rounded-lg px-3 py-2"
           />
+          {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
         </div>
 
-        {/* BOTÓN */}
         <button
-          disabled={loading}
-          className="bg-blue-600 text-white py-2 rounded-lg hover:opacity-90 disabled:opacity-70"
+          disabled={loading || !allValid()}
+          className="bg-blue-600 text-white py-2 rounded-lg hover:opacity-90 disabled:opacity-50"
         >
           {loading ? "Registrando..." : "Registrarme"}
         </button>
@@ -170,10 +267,8 @@ export default function RegisterFormClient() {
           <OAuthLoginButton role="client" />
         </div>
 
-        {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         {success && <p className="text-green-600 text-sm mt-2">{success}</p>}
       </form>
     </div>
   );
 }
-

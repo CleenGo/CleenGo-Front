@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 260" width="540" height="260" role="img" aria-label="CleenGo logo vertical">
+  <defs>
+    <linearGradient id="bloopGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8EDAF2"/>
+      <stop offset="100%" stop-color="#66C3E6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ícono Bloop centrado arriba -->
+  <g transform="translate(200,20)">
+    <circle cx="70" cy="70" r="56" fill="url(#bloopGrad)" stroke="#164A6B" stroke-width="8"/>
+    <ellipse cx="92" cy="38" rx="14" ry="10" fill="#BFEAFB" opacity="0.85"/>
+    <circle cx="54" cy="68" r="6.5" fill="#173A5F"/>
+    <circle cx="90" cy="68" r="6.5" fill="#173A5F"/>
+    <path d="M50 88c12 12 32 12 44 0" fill="none" stroke="#173A5F" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="126" cy="28" r="7" fill="#7EC8E3"/>
+    <circle cx="114" cy="20" r="5" fill="#7EC8E3"/>
+  </g>
+
+  <!-- Texto CleenGo pegado -->
+  <g font-family="Poppins, Manrope, system-ui, -apple-system, Segoe UI, Roboto, sans-serif"
+     font-weight="700"
+     font-size="64"
+     text-anchor="middle">
+    <text x="270" y="210">
+      <tspan fill="#1E3A5F">Cleen</tspan>
+      <tspan fill="#3DCC76" dx="-14">Go</tspan>
+    </text>
+  </g>
+</svg>
