@@ -156,19 +156,73 @@ function RegisterFormClient() {
         profileImgUrl: "",
         phone: ""
     });
+    const [errors, setErrors] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
+        name: "",
+        surname: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        birthDate: "",
+        phone: ""
+    });
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [success, setSuccess] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    // -------------------------------
+    // VALIDACIONES EN TIEMPO REAL
+    // -------------------------------
+    const validate = (field, value)=>{
+        let msg = "";
+        switch(field){
+            case "email":
+                if (!/^\S+@\S+\.\S+$/.test(value)) msg = "Correo inválido";
+                break;
+            case "password":
+                const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+                if (!strongRegex.test(value)) {
+                    msg = "Debe tener mayúscula, minúscula, número y símbolo, mínimo 8 caracteres";
+                }
+                if (form.confirmPassword && value !== form.confirmPassword) {
+                    msg = "Las contraseñas no coinciden";
+                }
+                break;
+            case "phone":
+                if (!/^\d+$/.test(value)) msg = "Solo números";
+                if (value.length < 9) msg = "Número demasiado corto";
+                break;
+            case "birthDate":
+                const birth = new Date(value);
+                const today = new Date();
+                const age = today.getFullYear() - birth.getFullYear();
+                if (!value) msg = "La fecha es obligatoria";
+                else if (age < 18 || age === 18 && today < new Date(birth.setFullYear(birth.getFullYear() + 18))) msg = "Debes ser mayor de 18 años";
+                break;
+            default:
+                if (!value.trim()) msg = "Campo obligatorio";
+                break;
+        }
+        setErrors((prev)=>({
+                ...prev,
+                [field]: msg
+            }));
+    };
     const handleChange = (e)=>{
+        const { name, value } = e.target;
         setForm({
             ...form,
-            [e.target.name]: e.target.value
+            [name]: value
         });
+        validate(name, value);
+    };
+    const allValid = ()=>{
+        return form.name && form.surname && form.email && form.password && form.confirmPassword && form.birthDate && form.phone && Object.values(errors).every((e)=>e === "");
     };
     const handleSubmit = async (e)=>{
         e.preventDefault();
+        if (!allValid()) {
+            setSuccess("");
+            return;
+        }
         setLoading(true);
-        setError("");
         setSuccess("");
         const bodyToSend = {
             ...form,
@@ -178,7 +232,7 @@ function RegisterFormClient() {
             await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$services$2f$auth$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["registerClient"])(bodyToSend);
             setSuccess("Cliente registrado correctamente");
         } catch (err) {
-            setError(err.response?.data?.message || "Error al registrarse");
+            console.log(err);
         } finally{
             setLoading(false);
         }
@@ -187,21 +241,20 @@ function RegisterFormClient() {
         className: "bg-white shadow-lg rounded-xl p-8 w-full max-w-md",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "flex justify-center mb-0",
+                className: "relative w-[400px] h-[200px] mx-auto mb-1",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                    src: "/logo-vertical-sin-fondo.png",
+                    src: "/logo-cleengo.svg",
                     alt: "CleenGo Logo",
-                    width: 150,
-                    height: 150,
+                    fill: true,
                     className: "object-contain"
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                    lineNumber: 57,
+                    lineNumber: 161,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                lineNumber: 56,
+                lineNumber: 160,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -209,7 +262,7 @@ function RegisterFormClient() {
                 children: "Registro Cliente"
             }, void 0, false, {
                 fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                lineNumber: 65,
+                lineNumber: 169,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -224,23 +277,30 @@ function RegisterFormClient() {
                                 children: "Nombre"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                                lineNumber: 72,
+                                lineNumber: 176,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                 name: "name",
                                 onChange: handleChange,
-                                placeholder: "Ej: Juan",
                                 className: "border rounded-lg px-3 py-2"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                                lineNumber: 73,
+                                lineNumber: 177,
                                 columnNumber: 11
+                            }, this),
+                            errors.name && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "text-red-500 text-sm",
+                                children: errors.name
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/components/RegisterFormClient.tsx",
+                                lineNumber: 182,
+                                columnNumber: 27
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                        lineNumber: 71,
+                        lineNumber: 175,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -251,23 +311,30 @@ function RegisterFormClient() {
                                 children: "Apellido"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                                lineNumber: 83,
+                                lineNumber: 187,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                 name: "surname",
                                 onChange: handleChange,
-                                placeholder: "Ej: Pérez",
                                 className: "border rounded-lg px-3 py-2"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                                lineNumber: 84,
+                                lineNumber: 188,
                                 columnNumber: 11
+                            }, this),
+                            errors.surname && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "text-red-500 text-sm",
+                                children: errors.surname
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/components/RegisterFormClient.tsx",
+                                lineNumber: 193,
+                                columnNumber: 30
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                        lineNumber: 82,
+                        lineNumber: 186,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -278,24 +345,31 @@ function RegisterFormClient() {
                                 children: "Correo"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                                lineNumber: 94,
+                                lineNumber: 198,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                 name: "email",
                                 type: "email",
                                 onChange: handleChange,
-                                placeholder: "Ej: juanperez@gmail.com",
                                 className: "border rounded-lg px-3 py-2"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                                lineNumber: 95,
+                                lineNumber: 199,
                                 columnNumber: 11
+                            }, this),
+                            errors.email && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "text-red-500 text-sm",
+                                children: errors.email
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/components/RegisterFormClient.tsx",
+                                lineNumber: 205,
+                                columnNumber: 28
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                        lineNumber: 93,
+                        lineNumber: 197,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -306,24 +380,31 @@ function RegisterFormClient() {
                                 children: "Contraseña"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                                lineNumber: 106,
+                                lineNumber: 210,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                 name: "password",
                                 type: "password",
                                 onChange: handleChange,
-                                placeholder: "Mínimo 8 caracteres",
                                 className: "border rounded-lg px-3 py-2"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                                lineNumber: 107,
+                                lineNumber: 211,
                                 columnNumber: 11
+                            }, this),
+                            errors.password && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "text-red-500 text-sm",
+                                children: errors.password
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/components/RegisterFormClient.tsx",
+                                lineNumber: 217,
+                                columnNumber: 31
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                        lineNumber: 105,
+                        lineNumber: 209,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -334,24 +415,31 @@ function RegisterFormClient() {
                                 children: "Confirmar contraseña"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                                lineNumber: 118,
+                                lineNumber: 222,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                 name: "confirmPassword",
                                 type: "password",
                                 onChange: handleChange,
-                                placeholder: "Repite la contraseña",
                                 className: "border rounded-lg px-3 py-2"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                                lineNumber: 119,
+                                lineNumber: 223,
                                 columnNumber: 11
+                            }, this),
+                            errors.confirmPassword && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "text-red-500 text-sm",
+                                children: errors.confirmPassword
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/components/RegisterFormClient.tsx",
+                                lineNumber: 230,
+                                columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                        lineNumber: 117,
+                        lineNumber: 221,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -362,7 +450,7 @@ function RegisterFormClient() {
                                 children: "Fecha de nacimiento"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                                lineNumber: 130,
+                                lineNumber: 236,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -372,40 +460,21 @@ function RegisterFormClient() {
                                 className: "border rounded-lg px-3 py-2"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                                lineNumber: 131,
-                                columnNumber: 11
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                        lineNumber: 129,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "flex flex-col",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                className: "text-gray-700 text-sm font-medium mb-1",
-                                children: "Imagen de perfil (URL)"
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                                lineNumber: 141,
+                                lineNumber: 237,
                                 columnNumber: 11
                             }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                name: "profileImgUrl",
-                                onChange: handleChange,
-                                placeholder: "Ej: https://miimagen.com/foto.jpg",
-                                className: "border rounded-lg px-3 py-2"
+                            errors.birthDate && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "text-red-500 text-sm",
+                                children: errors.birthDate
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                                lineNumber: 142,
-                                columnNumber: 11
+                                lineNumber: 244,
+                                columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                        lineNumber: 140,
+                        lineNumber: 235,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -416,32 +485,39 @@ function RegisterFormClient() {
                                 children: "Teléfono"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                                lineNumber: 152,
+                                lineNumber: 250,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                 name: "phone",
                                 onChange: handleChange,
-                                placeholder: "Ej: 987654321",
                                 className: "border rounded-lg px-3 py-2"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                                lineNumber: 153,
+                                lineNumber: 251,
                                 columnNumber: 11
+                            }, this),
+                            errors.phone && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "text-red-500 text-sm",
+                                children: errors.phone
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/components/RegisterFormClient.tsx",
+                                lineNumber: 256,
+                                columnNumber: 28
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                        lineNumber: 151,
+                        lineNumber: 249,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        disabled: loading,
-                        className: "bg-blue-600 text-white py-2 rounded-lg hover:opacity-90 disabled:opacity-70",
+                        disabled: loading || !allValid(),
+                        className: "bg-blue-600 text-white py-2 rounded-lg hover:opacity-90 disabled:opacity-50",
                         children: loading ? "Registrando..." : "Registrarme"
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                        lineNumber: 162,
+                        lineNumber: 259,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -450,44 +526,36 @@ function RegisterFormClient() {
                             role: "client"
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                            lineNumber: 170,
+                            lineNumber: 267,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                        lineNumber: 169,
+                        lineNumber: 266,
                         columnNumber: 9
-                    }, this),
-                    error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "text-red-500 text-sm mt-2",
-                        children: error
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                        lineNumber: 173,
-                        columnNumber: 19
                     }, this),
                     success && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-green-600 text-sm mt-2",
                         children: success
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                        lineNumber: 174,
+                        lineNumber: 270,
                         columnNumber: 21
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-                lineNumber: 69,
+                lineNumber: 173,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/RegisterFormClient.tsx",
-        lineNumber: 54,
+        lineNumber: 158,
         columnNumber: 5
     }, this);
 }
-_s(RegisterFormClient, "KJ27wlm4EgEa92wPraocw3Yeneg=");
+_s(RegisterFormClient, "TnWxNz2vNRswSP72e2k+xzjr1s0=");
 _c = RegisterFormClient;
 var _c;
 __turbopack_context__.k.register(_c, "RegisterFormClient");

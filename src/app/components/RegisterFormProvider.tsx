@@ -1,7 +1,8 @@
-"use client"
+"use client";
 
+import Image from "next/image";
 import { useForm } from "react-hook-form";
-import { registerProvider } from "@/app/services/auth"
+import { registerProvider } from "@/app/services/auth";
 import { useState } from "react";
 
 interface ProviderFormData {
@@ -22,12 +23,16 @@ export default function RegisterProviderForm() {
     const {
         register,
         handleSubmit,
+        watch,
         formState: { errors },
     } = useForm<ProviderFormData>();
 
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
+
+    const passwordValue = watch("password");
+    const birthDateValue = watch("birthDate");
 
     const onSubmit = async (data: ProviderFormData) => {
         setLoading(true);
@@ -44,174 +49,164 @@ export default function RegisterProviderForm() {
         }
     };
 
+    // VALIDAR SI ES MAYOR DE 18
+    const validateAge = (value: string) => {
+        const today = new Date();
+        const birth = new Date(value);
+
+        const age = today.getFullYear() - birth.getFullYear();
+        const monthDiff = today.getMonth() - birth.getMonth();
+
+        if (
+            monthDiff < 0 ||
+            (monthDiff === 0 && today.getDate() < birth.getDate())
+        ) {
+            return age - 1;
+        }
+
+        return age;
+    };
+
     return (
-        <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
+        <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md flex flex-col items-center">
+
+            <div className="relative w-[400px] h-[200px] mx-auto mb-2">
+                <Image
+                    src="/logo-cleengo.svg"
+                    alt="CleenGo Logo"
+                    fill
+                    className="object-contain"
+                />
+            </div>
+
             <h2 className="text-2xl font-semibold text-center mb-6">
                 Registro Proveedor
             </h2>
 
-            <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+            <form className="flex flex-col gap-4 w-full" onSubmit={handleSubmit(onSubmit)}>
+
                 {/* NOMBRE */}
                 <div className="flex flex-col">
-                    <label className="text-gray-700 text-sm font-medium mb-1">Nombre</label>
+                    <label>Nombre</label>
                     <input
-                        placeholder="Ej: Juan"
                         className="border rounded-lg px-3 py-2"
                         {...register("name", { required: "El nombre es obligatorio" })}
                     />
-                    {errors.name && <span className="text-red-500 text-sm">{errors.name.message}</span>}
+                    {errors.name && <span className="text-red-500">{errors.name.message}</span>}
                 </div>
 
                 {/* APELLIDO */}
                 <div className="flex flex-col">
-                    <label className="text-gray-700 text-sm font-medium mb-1">Apellido</label>
+                    <label>Apellido</label>
                     <input
-                        placeholder="Ej: Pérez"
                         className="border rounded-lg px-3 py-2"
                         {...register("surname", { required: "El apellido es obligatorio" })}
                     />
-                    {errors.surname && <span className="text-red-500 text-sm">{errors.surname.message}</span>}
+                    {errors.surname && <span className="text-red-500">{errors.surname.message}</span>}
                 </div>
 
                 {/* EMAIL */}
                 <div className="flex flex-col">
-                    <label className="text-gray-700 text-sm font-medium mb-1">Correo</label>
+                    <label>Correo</label>
                     <input
                         type="email"
-                        placeholder="Ej: juanperez@gmail.com"
                         className="border rounded-lg px-3 py-2"
-                        {...register("email", { required: "El correo es obligatorio" })}
+                        {...register("email", {
+                            required: "El correo es obligatorio",
+                            pattern: {
+                                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                message: "Correo inválido",
+                            },
+                        })}
                     />
-                    {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
+                    {errors.email && <span className="text-red-500">{errors.email.message}</span>}
                 </div>
 
                 {/* PASSWORD */}
                 <div className="flex flex-col">
-                    <label className="text-gray-700 text-sm font-medium mb-1">Contraseña</label>
+                    <label>Contraseña</label>
                     <input
                         type="password"
-                        placeholder="Mínimo 8 caracteres"
-                        className="border rounded-lg px-3 py-2"
+                        className={`border rounded-lg px-3 py-2 
+            ${errors.password ? "border-red-500" : "border-black-300"}`}
                         {...register("password", {
                             required: "La contraseña es obligatoria",
-                            minLength: { value: 8, message: "Debe tener al menos 8 caracteres" },
+                            validate: {
+                                minLength: (value) =>
+                                    value.length >= 8 || "Debe tener mínimo 8 caracteres",
+                                hasUpperCase: (value) =>
+                                    /[A-Z]/.test(value) || "Debe incluir una mayúscula",
+                                hasLowerCase: (value) =>
+                                    /[a-z]/.test(value) || "Debe incluir una minúscula",
+                                hasNumber: (value) =>
+                                    /\d/.test(value) || "Debe incluir un número",
+                            },
                         })}
                     />
-                    {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
+
+                    {/* MENSAJE DE ERROR */}
+                    {errors.password && (
+                        <span className="text-red-500 text-sm mt-1">
+                            {errors.password.message}
+                        </span>
+                    )}
                 </div>
 
                 {/* CONFIRM PASSWORD */}
                 <div className="flex flex-col">
-                    <label className="text-gray-700 text-sm font-medium mb-1">Confirmar contraseña</label>
+                    <label>Confirmar contraseña</label>
                     <input
                         type="password"
-                        placeholder="Repite la contraseña"
-                        className="border rounded-lg px-3 py-2"
-                        {...register("confirmPassword", { required: "Debes confirmar la contraseña" })}
+                        className={`border rounded-lg px-3 py-2 
+            ${errors.confirmPassword ? "border-red-500" : "border-black-300"}`}
+                        {...register("confirmPassword", {
+                            required: "Debes confirmar la contraseña",
+                            validate: (value) =>
+                                value === passwordValue || "Las contraseñas no coinciden",
+                        })}
                     />
                     {errors.confirmPassword && (
-                        <span className="text-red-500 text-sm">{errors.confirmPassword.message}</span>
+                        <span className="text-red-500 text-sm mt-1">
+                            {errors.confirmPassword.message}
+                        </span>
                     )}
                 </div>
-
-                {/* BIRTHDATE */}
+                {/* FECHA DE NACIMIENTO */}
                 <div className="flex flex-col">
-                    <label className="text-gray-700 text-sm font-medium mb-1">Fecha de nacimiento</label>
+                    <label>Fecha de nacimiento</label>
                     <input
                         type="date"
                         className="border rounded-lg px-3 py-2"
-                        {...register("birthDate", { required: "La fecha de nacimiento es obligatoria" })}
+                        {...register("birthDate", {
+                            required: "La fecha de nacimiento es obligatoria",
+                            validate: (value) =>
+                                validateAge(value) >= 18 ||
+                                "Debes ser mayor de 18 años",
+                        })}
                     />
                     {errors.birthDate && (
-                        <span className="text-red-500 text-sm">{errors.birthDate.message}</span>
+                        <span className="text-red-500">{errors.birthDate.message}</span>
                     )}
-                </div>
-
-                {/* PROFILE IMG */}
-                <div className="flex flex-col">
-                    <label className="text-gray-700 text-sm font-medium mb-1">Imagen de perfil (URL)</label>
-                    <input
-                        placeholder="Ej: https://miimagen.com/foto.jpg"
-                        className="border rounded-lg px-3 py-2"
-                        {...register("profileImgUrl")}
-                    />
                 </div>
 
                 {/* PHONE */}
                 <div className="flex flex-col">
-                    <label className="text-gray-700 text-sm font-medium mb-1">Teléfono</label>
+                    <label>Teléfono</label>
                     <input
-                        placeholder="Ej: 987654321"
                         className="border rounded-lg px-3 py-2"
                         {...register("phone", {
                             required: "El teléfono es obligatorio",
-                            minLength: { value: 10, message: "Número muy corto" },
+                            pattern: {
+                                value: /^[0-9]+$/,
+                                message: "Solo números",
+                            },
+                            minLength: { value: 9, message: "Debe tener al menos 9 dígitos" },
+                            maxLength: { value: 15, message: "Número demasiado largo" },
                         })}
                     />
-                    {errors.phone && (
-                        <span className="text-red-500 text-sm">{errors.phone.message}</span>
-                    )}
+                    {errors.phone && <span className="text-red-500">{errors.phone.message}</span>}
                 </div>
-                {/* DAYS */}
-                <div>
-                    <p className="text-sm font-medium text-gray-700 mb-1">Días de atención</p>
 
-                    <div className="grid grid-cols-2 gap-2">
-                        {["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"].map((day) => (
-                            <label key={day} className="flex items-center gap-2">
-                                <input
-                                    type="checkbox"
-                                    value={day}
-                                    {...register("days", { required: "Debe seleccionar días" })}
-                                    className="w-4 h-4"
-                                />
-                                <span>{day}</span>
-                            </label>
-                        ))}
-                    </div>
-
-                    {errors.days && (
-                        <span className="text-red-500 text-sm">{errors.days.message}</span>
-                    )}
-                </div>
-                {/* HOURS */}
-                <div>
-                    <p className="text-sm font-medium text-gray-700 mb-1">Horarios disponibles</p>
-
-                    <div className="grid grid-cols-1 gap-2">
-                        {["09:00-12:00", "14:00-18:00", "18:00-21:00"].map((hour) => (
-                            <label key={hour} className="flex items-center gap-2">
-                                <input
-                                    type="checkbox"
-                                    value={hour}
-                                    {...register("hours", { required: "Debe seleccionar horas" })}
-                                    className="w-4 h-4"
-                                />
-                                <span>{hour}</span>
-                            </label>
-                        ))}
-                    </div>
-
-                    {errors.hours && (
-                        <span className="text-red-500 text-sm">{errors.hours.message}</span>
-                    )}
-                </div>
-                {/* ABOUT */}
-                <textarea
-                    placeholder="Cuéntanos sobre tu experiencia..."
-                    rows={4}
-                    className="border rounded-lg px-3 py-2"
-                    {...register("about", {
-                        required: "Este campo es obligatorio",
-                        minLength: { value: 20, message: "Mínimo 20 caracteres" },
-                        maxLength: { value: 250, message: "Máximo 250 caracteres" },
-                    })}
-                />
-                {errors.about && (
-                    <span className="text-red-500 text-sm">{errors.about.message}</span>
-                )}
-
-                {/* BUTTON */}
                 <button
                     disabled={loading}
                     className="bg-blue-600 text-white py-2 rounded-lg hover:opacity-90 disabled:opacity-70"
@@ -219,9 +214,8 @@ export default function RegisterProviderForm() {
                     {loading ? "Registrando..." : "Registrarme como Proveedor"}
                 </button>
 
-                {/* ERRORS */}
-                {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
-                {success && <p className="text-green-600 text-sm mt-2">{success}</p>}
+                {error && <p className="text-red-500">{error}</p>}
+                {success && <p className="text-green-600">{success}</p>}
             </form>
         </div>
     );
