@@ -10,10 +10,10 @@ export default function RegisterRolePage() {
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#F7FAFC] px-4">
       {/* Logo */}
       <Image
-        src="/cleengo-logo-light.svg" // Ajusta al nombre real en public
+        src="/logo-cleengo.svg" // Ajusta al nombre real en public
         alt="CleenGo Logo"
-        width={180}
-        height={80}
+        width={400}
+        height={100}
         className="mb-8"
       />
 
