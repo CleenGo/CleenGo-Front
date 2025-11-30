@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 17, "column": 0}, "map": {"version":3,"sources":["file:///C:/Proyecto_final/PF-CleenGo/CleenGo-Front/src/app/register/client/page.tsx"],"sourcesContent":["<div className=\"min-h-screen flex flex-col items-center justify-center bg-[#F7FAFC] text-[#0C2340] px-4\">\r\n\r\n  {/* LOGO */}\r\n  <Image\r\n    src=\"/logo-vertical-sin-fondo.png\"\r\n    alt=\"CleenGo Logo\"\r\n    width={160}\r\n    height={80}\r\n    className=\"h-20 mb-6 w-auto\"\r\n  />\r\n\r\n  {/* FORMULARIO */}\r\n  <RegisterFormClient />\r\n\r\n</div>"],"names":[],"mappings":";AAAA,QAAC;IAAI,WAAU;;sBAGb,QAAC;YACC,KAAI;YACJ,KAAI;YACJ,OAAO;YACP,QAAQ;YACR,WAAU;;;;;;sBAIZ,QAAC"}}]
-}
