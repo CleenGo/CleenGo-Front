@@ -36,7 +36,7 @@ export default function LandingPage() {
                 </p>
               </div>
 
-              {/* CTA Buttons */}
+              {/* Buttons */}
               <div className="flex flex-wrap gap-4">
                 <Link
                   href="/register"
@@ -89,7 +89,7 @@ export default function LandingPage() {
 
             {/* Right Column - Cards */}
             <div className="relative">
-              {/* Testimonial Card */}
+              {/* Testimonios Card */}
               <div className="bg-white text-gray-800 rounded-2xl p-6 shadow-2xl mb-6 transform hover:scale-105 transition-transform">
                 <div className="flex items-start gap-4">
                   <div className="bg-[#0A65FF] rounded-xl p-3">
@@ -129,7 +129,7 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              {/* Verification Badge */}
+              {/* Verification Badge elementos visuales */}
               <div className="bg-white text-gray-800 rounded-2xl p-6 shadow-2xl mt-6 transform hover:scale-105 transition-transform">
                 <div className="flex items-center gap-4">
                   <div className="bg-[#2CC9C9] rounded-xl p-3">
@@ -153,20 +153,20 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* Why Choose CleenGo Section */}
+      {/* CleenGo Section */}
       <div className="bg-gray-50 py-20 px-4">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              ¿Por qué elegir <span className="text-[#0A65FF]">CleenGo</span>?
-            </h2>
+  ¿Por qué elegir <span className="text-[#0c3055]">Cleen<span className="text-[#22C55E]">Go</span></span>?
+</h2>
             <p className="text-xl text-gray-600">
               Más que una plataforma, somos tu aliado en limpieza
             </p>
           </div>
 
-          {/* Features Grid */}
+          {/* Features tarjetas */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Feature 1 - Rápido y Fácil */}
             <div className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100">
@@ -313,7 +313,7 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* CTA Section - Ready to Start */}
+      {/* Section - Ready to Start */}
       <div className="bg-gradient-to-br from-[#0A65FF] via-[#1E73FF] to-[#2CC9C9] py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           {/* Icon */}
@@ -336,7 +336,7 @@ export default function LandingPage() {
             y obtén un descuento especial!
           </p>
 
-          {/* CTA Buttons */}
+          {/* Buttons */}
           <div className="flex flex-wrap gap-4 justify-center mb-12">
             <Link
               href="/register"
