@@ -20,6 +20,29 @@ export interface RegisterClientResponse {
   token?: string; // por si el backend devuelve token al registrar
 }
 
+export interface RegisterProviderRequest {
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  birthDate: string;
+  profileImgUrl?: string;
+  phone: string;
+
+  // Campos específicos del provider:
+  days: string[];  
+  hours: string[];  
+  about: string;    
+}
+
+export interface RegisterProviderResponse {
+  message: string;
+  provider: any;
+  token?: string;
+}
+
+
 // --------- Tipos para login normal ---------
 export interface LoginRequest {
   email: string;
@@ -61,6 +84,15 @@ export async function login(data: LoginRequest) {
   return response.data;
 }
 
+export async function registerProvider(data: RegisterProviderRequest) {
+  const response = await http.post<RegisterProviderResponse>(
+    "/auth/register/provider",
+    data
+  );
+  return response.data;
+}
+
+
 // Login / registro con Google (Supabase OAuth)
 export async function thirdPartyLogin(
   role: "client" | "provider",
@@ -72,3 +104,4 @@ export async function thirdPartyLogin(
   );
   return response.data;
 }
+

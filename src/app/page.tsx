@@ -5,7 +5,7 @@ import Link from "next/link";
 import Navbar from "./components/Navbar";
 import { AuthProvider } from "./contexts/AuthContext";
 
-export default function HomePage() {
+export default function LandingPage() {
   return (
     <AuthProvider>
       <Navbar />
@@ -240,7 +240,7 @@ export default function HomePage() {
               3 pasos para tu hogar limpio
             </h2>
             <p className="text-xl text-gray-600">
-              Así de simple es usar Cleen Go
+              Así de simple es usar CleenGo
             </p>
           </div>
 

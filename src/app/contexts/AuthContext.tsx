@@ -14,6 +14,7 @@ interface User {
   name: string;
   surname?: string;
   profileImgUrl?: string;
+  role: "client" | "provider";
 }
 
 interface AuthContextType {
@@ -49,6 +50,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       name: rawUser.name || rawUser.full_name || "",
       surname: rawUser.surname || "",
       profileImgUrl: rawUser.profileImgUrl || rawUser.avatar_url || "",
+       role: rawUser.role,  
     };
 
     setUser(normalizedUser);
