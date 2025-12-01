@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { useAuth } from '@/app/contexts/AuthContext';
+import Link from "next/link";
+import Image from "next/image";
+import { useAuth } from "@/app/contexts/AuthContext";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -27,7 +27,10 @@ export default function Navbar() {
       {/* ------------------- */}
       {!user && (
         <div className="flex items-center gap-8">
-          <Link href="/inicio" className="text-gray-700 font-medium hover:text-teal-500 transition">
+          <Link
+            href="/inicio"
+            className="text-gray-700 font-medium hover:text-teal-500 transition"
+          >
             Inicio
           </Link>
           <Link
@@ -42,7 +45,10 @@ export default function Navbar() {
           >
             Suscripción
           </Link>
-          <Link href="/blog" className="text-gray-700 font-medium hover:text-teal-500 transition">
+          <Link
+            href="/blog"
+            className="text-gray-700 font-medium hover:text-teal-500 transition"
+          >
             Blog
           </Link>
 
@@ -59,9 +65,12 @@ export default function Navbar() {
       {/* ------------------- */}
       {/* CLIENTE NAVBAR     */}
       {/* ------------------- */}
-      {user && role === 'client' && (
+      {user && role === "client" && (
         <div className="flex items-center gap-6">
-          <Link href="/inicio" className="text-gray-700 font-medium hover:text-teal-500 transition">
+          <Link
+            href="/inicio"
+            className="text-gray-700 font-medium hover:text-teal-500 transition"
+          >
             Inicio
           </Link>
           <Link
@@ -76,7 +85,10 @@ export default function Navbar() {
           >
             Suscripción
           </Link>
-          <Link href="/blog" className="text-gray-700 font-medium hover:text-teal-500 transition">
+          <Link
+            href="/blog"
+            className="text-gray-700 font-medium hover:text-teal-500 transition"
+          >
             Blog
           </Link>
 
@@ -85,7 +97,12 @@ export default function Navbar() {
             href="/client/appointments"
             className="relative text-gray-700 hover:text-teal-500 transition"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -99,7 +116,10 @@ export default function Navbar() {
           </Link>
 
           {/* User profile */}
-          <Link href="/client/profile" className="text-gray-700 hover:text-teal-500 transition">
+          <Link
+            href="/client/profile"
+            className="text-gray-700 hover:text-teal-500 transition"
+          >
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fillRule="evenodd"
@@ -111,7 +131,8 @@ export default function Navbar() {
 
           {/* User greeting */}
           <span className="text-gray-700 font-medium">
-            ¡Hola, <span className="text-teal-500 font-semibold">{user.name}</span>!
+            ¡Hola,{" "}
+            <span className="text-teal-500 font-semibold">{user.name}</span>!
           </span>
 
           {/* Logout button */}
@@ -127,9 +148,12 @@ export default function Navbar() {
       {/* ------------------- */}
       {/* PROVEEDOR NAVBAR   */}
       {/* ------------------- */}
-      {user && role === 'provider' && (
+      {user && role === "provider" && (
         <div className="flex items-center gap-6">
-          <Link href="/inicio" className="text-gray-700 font-medium hover:text-teal-500 transition">
+          <Link
+            href="/inicio"
+            className="text-gray-700 font-medium hover:text-teal-500 transition"
+          >
             Inicio
           </Link>
           <Link
@@ -144,7 +168,10 @@ export default function Navbar() {
           >
             Suscripción
           </Link>
-          <Link href="/blog" className="text-gray-700 font-medium hover:text-teal-500 transition">
+          <Link
+            href="/blog"
+            className="text-gray-700 font-medium hover:text-teal-500 transition"
+          >
             Blog
           </Link>
 
@@ -153,7 +180,12 @@ export default function Navbar() {
             href="/provider/appointments"
             className="text-gray-700 hover:text-teal-500 transition"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -164,7 +196,10 @@ export default function Navbar() {
           </Link>
 
           {/* User profile */}
-          <Link href="/provider/profile" className="text-gray-700 hover:text-teal-500 transition">
+          <Link
+            href="/provider/profile"
+            className="text-gray-700 hover:text-teal-500 transition"
+          >
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fillRule="evenodd"
@@ -176,7 +211,8 @@ export default function Navbar() {
 
           {/* User greeting */}
           <span className="text-gray-700 font-medium">
-            ¡Hola, <span className="text-teal-500 font-semibold">{user.name}</span>!
+            ¡Hola,{" "}
+            <span className="text-teal-500 font-semibold">{user.name}</span>!
           </span>
 
           {/* Logout button */}
