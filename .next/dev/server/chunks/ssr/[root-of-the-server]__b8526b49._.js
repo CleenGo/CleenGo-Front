@@ -148,13 +148,8 @@ function Navbar() {
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-<<<<<<< HEAD
-                        href: "/client/providers",
-                        className: "text-[#0C2340] hover:opacity-70 transition",
-=======
                         href: "/proveedores",
                         className: "text-gray-700 font-medium hover:text-teal-500 transition",
->>>>>>> 25d258118127936cedeb816769be7417d1aaa738
                         children: "Proveedores"
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/Navbar.tsx",
@@ -316,7 +311,6 @@ function Navbar() {
                         lineNumber: 113,
                         columnNumber: 11
                     }, this),
-                    "  ",
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         onClick: logout,
                         className: "bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-200 transition",

@@ -64,15 +64,10 @@ export default function Navbar() {
           <Link href="/inicio" className="text-gray-700 font-medium hover:text-teal-500 transition">
             Inicio
           </Link>
-<<<<<<< HEAD
-
-          <Link href="/client/providers" className="text-[#0C2340] hover:opacity-70 transition">
-=======
           <Link
             href="/proveedores"
             className="text-gray-700 font-medium hover:text-teal-500 transition"
           >
->>>>>>> 25d258118127936cedeb816769be7417d1aaa738
             Proveedores
           </Link>
           <Link
@@ -168,11 +163,6 @@ export default function Navbar() {
             </svg>
           </Link>
 
-<<<<<<< HEAD
-          <Link href="/provider/profile" className="text-[#0C2340] hover:opacity-70 transition">
-            Perfil
-          </Link>  {/* cambie esto para que en la navbar proveedores me redirija a proveedores*/}
-=======
           {/* User profile */}
           <Link href="/provider/profile" className="text-gray-700 hover:text-teal-500 transition">
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
@@ -183,7 +173,6 @@ export default function Navbar() {
               />
             </svg>
           </Link>
->>>>>>> 25d258118127936cedeb816769be7417d1aaa738
 
           {/* User greeting */}
           <span className="text-gray-700 font-medium">

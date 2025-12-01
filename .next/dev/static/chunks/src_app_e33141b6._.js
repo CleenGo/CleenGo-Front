@@ -140,6 +140,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navi
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$services$2f$auth$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/services/auth.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$OAuthLoginButton$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/components/OAuthLoginButton.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$contexts$2f$AuthContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/contexts/AuthContext.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sweetalert2$2f$dist$2f$sweetalert2$2e$all$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/sweetalert2/dist/sweetalert2.all.js [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
@@ -150,11 +151,84 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
+;
+// Iconos SVG para ver / ocultar contraseña (como en registro)
+const EyeIcon = ()=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        className: "h-4 w-4",
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                d: "M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"
+            }, void 0, false, {
+                fileName: "[project]/src/app/components/LoginForm.tsx",
+                lineNumber: 22,
+                columnNumber: 5
+            }, ("TURBOPACK compile-time value", void 0)),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
+                cx: "12",
+                cy: "12",
+                r: "3"
+            }, void 0, false, {
+                fileName: "[project]/src/app/components/LoginForm.tsx",
+                lineNumber: 23,
+                columnNumber: 5
+            }, ("TURBOPACK compile-time value", void 0))
+        ]
+    }, void 0, true, {
+        fileName: "[project]/src/app/components/LoginForm.tsx",
+        lineNumber: 14,
+        columnNumber: 3
+    }, ("TURBOPACK compile-time value", void 0));
+_c = EyeIcon;
+const EyeOffIcon = ()=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        className: "h-4 w-4",
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                d: "M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.81 21.81 0 0 1 5.06-6.28"
+            }, void 0, false, {
+                fileName: "[project]/src/app/components/LoginForm.tsx",
+                lineNumber: 36,
+                columnNumber: 5
+            }, ("TURBOPACK compile-time value", void 0)),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                d: "M9.88 9.88A3 3 0 0 0 12 15a3 3 0 0 0 2.12-.88"
+            }, void 0, false, {
+                fileName: "[project]/src/app/components/LoginForm.tsx",
+                lineNumber: 37,
+                columnNumber: 5
+            }, ("TURBOPACK compile-time value", void 0)),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("line", {
+                x1: "1",
+                y1: "1",
+                x2: "23",
+                y2: "23"
+            }, void 0, false, {
+                fileName: "[project]/src/app/components/LoginForm.tsx",
+                lineNumber: 38,
+                columnNumber: 5
+            }, ("TURBOPACK compile-time value", void 0))
+        ]
+    }, void 0, true, {
+        fileName: "[project]/src/app/components/LoginForm.tsx",
+        lineNumber: 28,
+        columnNumber: 3
+    }, ("TURBOPACK compile-time value", void 0));
+_c1 = EyeOffIcon;
 function LoginForm() {
     _s();
     const [email, setEmail] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [password, setPassword] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [loginError, setLoginError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [showPassword, setShowPassword] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
     const { login: loginContext } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$contexts$2f$AuthContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuth"])();
     // 🔵 VALIDACIÓN DINÁMICA DEL EMAIL
@@ -189,28 +263,41 @@ function LoginForm() {
                 password
             });
             loginContext(res.user, res.accessToken);
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sweetalert2$2f$dist$2f$sweetalert2$2e$all$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].fire({
+                icon: "success",
+                title: "Inicio de sesión exitoso",
+                text: res?.message || "Bienvenido/a a CleenGo",
+                confirmButtonText: "Continuar"
+            });
             router.push("/");
-        } catch  {
-            setLoginError("Credenciales no válidas");
+        } catch (err) {
+            const message = err?.response?.data?.message || "Credenciales no válidas";
+            setLoginError(message);
+            await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sweetalert2$2f$dist$2f$sweetalert2$2e$all$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].fire({
+                icon: "error",
+                title: "Error al iniciar sesión",
+                text: message,
+                confirmButtonText: "Cerrar"
+            });
         }
     };
+    // Reglas con estilo más neutro (gris) y pequeño
     const renderRule = (ok, text)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-            className: `text-sm flex items-center gap-2 ${ok ? "text-green-600" : "text-red-500"}`,
+            className: `text-xs flex items-center gap-2 ${ok ? "text-green-600" : "text-gray-500"}`,
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                    className: "font-bold",
-                    children: ok ? "✔" : "✘"
+                    className: "font-medium text-sm",
+                    children: ok ? "✔" : "•"
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/LoginForm.tsx",
-                    lineNumber: 52,
+                    lineNumber: 107,
                     columnNumber: 7
                 }, this),
-                " ",
                 text
             ]
-        }, void 0, true, {
+        }, text, true, {
             fileName: "[project]/src/app/components/LoginForm.tsx",
-            lineNumber: 51,
+            lineNumber: 101,
             columnNumber: 5
         }, this);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -226,12 +313,12 @@ function LoginForm() {
                     className: "object-contain"
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/LoginForm.tsx",
-                    lineNumber: 59,
+                    lineNumber: 115,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/LoginForm.tsx",
-                lineNumber: 58,
+                lineNumber: 114,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -239,7 +326,7 @@ function LoginForm() {
                 children: "Iniciar Sesión"
             }, void 0, false, {
                 fileName: "[project]/src/app/components/LoginForm.tsx",
-                lineNumber: 68,
+                lineNumber: 124,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -253,13 +340,13 @@ function LoginForm() {
                                 children: "Correo electrónico"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/LoginForm.tsx",
-                                lineNumber: 75,
+                                lineNumber: 131,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                 type: "email",
                                 placeholder: "ejemplo@correo.com",
-                                className: `w-full border rounded-lg px-3 py-2 
+                                className: `w-full border rounded-lg px-3 py-2
               focus:outline-none focus:ring-2
               ${email.length === 0 ? "border-gray-300" : isEmailValid ? "border-green-500 focus:ring-green-400" : "border-red-500 focus:ring-red-400"}
             `,
@@ -267,21 +354,21 @@ function LoginForm() {
                                 onChange: (e)=>setEmail(e.target.value)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/LoginForm.tsx",
-                                lineNumber: 76,
+                                lineNumber: 134,
                                 columnNumber: 11
                             }, this),
                             email.length > 0 && !isEmailValid && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-red-500 text-sm",
+                                className: "text-red-500 text-xs mt-1",
                                 children: "Correo inválido"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/LoginForm.tsx",
-                                lineNumber: 88,
+                                lineNumber: 152,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/LoginForm.tsx",
-                        lineNumber: 74,
+                        lineNumber: 130,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -291,24 +378,53 @@ function LoginForm() {
                                 children: "Contraseña"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/LoginForm.tsx",
-                                lineNumber: 94,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                type: "password",
-                                placeholder: "••••••••",
-                                className: `w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2
-              ${password.length === 0 ? "border-gray-300" : allValid ? "border-green-500 focus:ring-green-400" : "border-red-500 focus:ring-red-400"}
-            `,
-                                value: password,
-                                onChange: (e)=>setPassword(e.target.value)
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/components/LoginForm.tsx",
-                                lineNumber: 95,
+                                lineNumber: 158,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "mt-2 space-y-1",
+                                className: `
+              flex items-center rounded-lg px-3 py-2 bg-white border
+              ${password.length === 0 ? "border-gray-300" : allValid ? "border-green-500" : "border-red-500"}
+            `,
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                        type: showPassword ? "text" : "password",
+                                        placeholder: "••••••••",
+                                        className: "flex-1 outline-none",
+                                        value: password,
+                                        onChange: (e)=>setPassword(e.target.value)
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/components/LoginForm.tsx",
+                                        lineNumber: 172,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        type: "button",
+                                        onClick: ()=>setShowPassword((v)=>!v),
+                                        className: "ml-2 text-gray-600 hover:text-black",
+                                        "aria-label": showPassword ? "Ocultar contraseña" : "Mostrar contraseña",
+                                        children: showPassword ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(EyeOffIcon, {}, void 0, false, {
+                                            fileName: "[project]/src/app/components/LoginForm.tsx",
+                                            lineNumber: 187,
+                                            columnNumber: 31
+                                        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(EyeIcon, {}, void 0, false, {
+                                            fileName: "[project]/src/app/components/LoginForm.tsx",
+                                            lineNumber: 187,
+                                            columnNumber: 48
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/components/LoginForm.tsx",
+                                        lineNumber: 179,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/app/components/LoginForm.tsx",
+                                lineNumber: 160,
+                                columnNumber: 11
+                            }, this),
+                            password.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "mt-2 space-y-0.5",
                                 children: [
                                     renderRule(passwordRules.length, "Mínimo 8 caracteres"),
                                     renderRule(passwordRules.upper, "Al menos una MAYÚSCULA"),
@@ -318,37 +434,37 @@ function LoginForm() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/components/LoginForm.tsx",
-                                lineNumber: 106,
-                                columnNumber: 11
+                                lineNumber: 193,
+                                columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/LoginForm.tsx",
-                        lineNumber: 93,
+                        lineNumber: 157,
                         columnNumber: 9
                     }, this),
                     loginError && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "text-red-500 text-center",
+                        className: "text-red-500 text-center text-sm mt-1",
                         children: loginError
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/LoginForm.tsx",
-                        lineNumber: 116,
-                        columnNumber: 24
+                        lineNumber: 208,
+                        columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         type: "submit",
-                        disabled: !isEmailValid || !allValid,
+                        disabled: !isEmailValid || !allValid || !email || !password,
                         className: "bg-[#0A65FF] text-white font-medium py-2 rounded-lg hover:opacity-90 transition disabled:opacity-50",
                         children: "Iniciar Sesión"
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/LoginForm.tsx",
-                        lineNumber: 118,
+                        lineNumber: 211,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/LoginForm.tsx",
-                lineNumber: 72,
+                lineNumber: 128,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -357,12 +473,12 @@ function LoginForm() {
                     role: "client"
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/LoginForm.tsx",
-                    lineNumber: 128,
+                    lineNumber: 221,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/LoginForm.tsx",
-                lineNumber: 127,
+                lineNumber: 220,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -376,31 +492,33 @@ function LoginForm() {
                         children: "Regístrate aquí"
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/LoginForm.tsx",
-                        lineNumber: 133,
+                        lineNumber: 226,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/LoginForm.tsx",
-                lineNumber: 131,
+                lineNumber: 224,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/LoginForm.tsx",
-        lineNumber: 57,
+        lineNumber: 113,
         columnNumber: 5
     }, this);
 }
-_s(LoginForm, "e0MW3+rcA41ydkzJWyit75aYaUo=", false, function() {
+_s(LoginForm, "/EAJVr2IsqC/MIajj+mdIUr3SxA=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"],
         __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$contexts$2f$AuthContext$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useAuth"]
     ];
 });
-_c = LoginForm;
-var _c;
-__turbopack_context__.k.register(_c, "LoginForm");
+_c2 = LoginForm;
+var _c, _c1, _c2;
+__turbopack_context__.k.register(_c, "EyeIcon");
+__turbopack_context__.k.register(_c1, "EyeOffIcon");
+__turbopack_context__.k.register(_c2, "LoginForm");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(__turbopack_context__.m, globalThis.$RefreshHelpers$);
 }
