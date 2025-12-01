@@ -52,7 +52,7 @@ export default function Navbar() {
             Inicio
           </Link>
 
-          <Link href="/client/appointments" className="text-[#0C2340] hover:opacity-70 transition">
+          <Link href="/client/providers" className="text-[#0C2340] hover:opacity-70 transition">
             Proveedores
           </Link>
 
@@ -86,7 +86,7 @@ export default function Navbar() {
 
           <Link href="/provider/profile" className="text-[#0C2340] hover:opacity-70 transition">
             Perfil
-          </Link>
+          </Link>  {/* cambie esto para que en la navbar proveedores me redirija a proveedores*/}
 
           <button
             onClick={logout}
