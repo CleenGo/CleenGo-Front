@@ -26,6 +26,10 @@ dist-ssr/
 .env.production
 .env.deveplopment
 
+.env.development
+.env.example
+.env.production
+
 # System files
 .DS_Store
 Thumbs.db
