@@ -42,13 +42,13 @@ export default function LandingPage() {
                   href="/register"
                   className="bg-white text-[#0A65FF] px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-all shadow-lg hover:shadow-xl flex items-center gap-2 group"
                 >
-                  Calcula tu servicio
+                  Registrarse
                   <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
                 <Link
-                  href="/login"
+                  href="/client/providers"
                   className="bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/20 transition-all border border-white/30"
                 >
                   Ver proveedores
