@@ -24,6 +24,10 @@ dist-ssr/
 .env.*.local
 !.env.example
 
+.env.development
+.env.example
+.env.production
+
 # System files
 .DS_Store
 Thumbs.db
