@@ -12,7 +12,7 @@ export default function Navbar() {
   return (
     <nav className="w-full bg-white shadow-md fixed top-0 left-0 flex items-center justify-between px-8 py-4 z-50 border-b border-gray-100">
       {/* Logo */}
-      <Link href="/client/home" className="flex items-center gap-2">
+      <Link href="/" className="flex items-center gap-2">
         <Image
           src="/logo-horizontal.svg"
           alt="CleenGo Logo"
@@ -28,7 +28,7 @@ export default function Navbar() {
       {!user && (
         <div className="flex items-center gap-8">
           <Link
-            href="/inicio"
+            href="/client/home"
             className="text-gray-700 font-medium hover:text-teal-500 transition"
           >
             Inicio
@@ -67,7 +67,10 @@ export default function Navbar() {
       {/* ------------------- */}
       {user && role === "client" && (
         <div className="flex items-center gap-6">
-          <Link href="/client/home" className="text-gray-700 font-medium hover:text-teal-500 transition">
+          <Link
+            href="/client/home"
+            className="text-gray-700 font-medium hover:text-teal-500 transition"
+          >
             Inicio
           </Link>
           <Link
@@ -147,7 +150,10 @@ export default function Navbar() {
       {/* ------------------- */}
       {user && role === "provider" && (
         <div className="flex items-center gap-6">
-          <Link href="/provider/dashboard" className="text-gray-700 font-medium hover:text-teal-500 transition">
+          <Link
+            href="/provider/dashboard"
+            className="text-gray-700 font-medium hover:text-teal-500 transition"
+          >
             Dashboard
           </Link>
           <Link
