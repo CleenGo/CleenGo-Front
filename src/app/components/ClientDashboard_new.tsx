@@ -9,7 +9,7 @@ import { User, Mail, Phone, CheckCircle, Award, DollarSign, Clock, Calendar } fr
 
 interface Appointment {
   id: string;
-  status: 'completed' | 'scheduled';
+  status: string;
   cost: number;
   date?: string;
   [key: string]: unknown;
@@ -37,9 +37,6 @@ export default function ClientDashboard() {
     upcomingServices: 0,
   });
 
-  // ======================
-  // CARGA DE PERFIL
-  // ======================
   useEffect(() => {
     if (!user || !token) return;
 
@@ -61,9 +58,6 @@ export default function ClientDashboard() {
     fetchProfile();
   }, [user, token]);
 
-  // ======================
-  // CARGA DE SERVICIOS
-  // ======================
   useEffect(() => {
     if (!user || !token) return;
 
@@ -77,11 +71,8 @@ export default function ClientDashboard() {
         );
         const data = await res.json();
 
-        // Manejar si la respuesta es un array o un objeto
-        const appointments = Array.isArray(data) ? data : data.data || [];
-
-        const completed = appointments.filter((a: Appointment) => a.status === 'completed');
-        const upcoming = appointments.filter((a: Appointment) => a.status === 'scheduled');
+        const completed = data.filter((a: Appointment) => a.status === 'completed');
+        const upcoming = data.filter((a: Appointment) => a.status === 'scheduled');
 
         const total = completed.reduce((acc: number, curr: Appointment) => acc + curr.cost, 0);
 
@@ -91,7 +82,7 @@ export default function ClientDashboard() {
           upcomingServices: upcoming.length,
         });
 
-        setAppointments(appointments);
+        setAppointments(data);
       } catch (error) {
         console.error(error);
       }
@@ -103,14 +94,12 @@ export default function ClientDashboard() {
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-slate-100 to-emerald-50 py-10 px-4">
       <div className="max-w-7xl mx-auto">
-        {/* ================= HEADER / PERFIL ================= */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl p-10 mb-10 border border-white"
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
-            {/* FOTO */}
             <div className="flex justify-center">
               <div className="relative">
                 {profile?.profileImgUrl ? (
@@ -132,7 +121,6 @@ export default function ClientDashboard() {
               </div>
             </div>
 
-            {/* INFO */}
             <div className="text-center md:text-left space-y-3">
               <h1 className="text-3xl font-bold text-gray-900">
                 {profile?.name} {profile?.surname}
@@ -158,7 +146,6 @@ export default function ClientDashboard() {
               </button>
             </div>
 
-            {/* BADGE */}
             <div className="flex justify-center">
               <div className="bg-linear-to-br from-blue-500 to-emerald-600 text-white rounded-2xl p-8 shadow-xl text-center w-full md:w-auto">
                 <Award className="w-10 h-10 mx-auto mb-3" />
@@ -169,9 +156,7 @@ export default function ClientDashboard() {
           </div>
         </motion.div>
 
-        {/* ================= TARJETAS DE ESTADÍSTICAS ================= */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
-          {/* Total Gastado */}
           <div className="bg-white/90 backdrop-blur-md border border-white shadow-xl rounded-2xl p-6">
             <div className="flex justify-between mb-3">
               <div className="bg-blue-100 p-3 rounded-xl">
@@ -182,7 +167,6 @@ export default function ClientDashboard() {
             <p className="text-3xl font-bold text-gray-900">${stats.totalSpent || 0}</p>
           </div>
 
-          {/* Completados */}
           <div className="bg-white/90 backdrop-blur-md border border-white shadow-xl rounded-2xl p-6">
             <div className="bg-emerald-100 p-3 rounded-xl mb-3">
               <CheckCircle className="text-emerald-600 w-6 h-6" />
@@ -191,7 +175,6 @@ export default function ClientDashboard() {
             <p className="text-3xl font-bold text-gray-900">{stats.completedServices}</p>
           </div>
 
-          {/* Próximos */}
           <div className="bg-white/90 backdrop-blur-md border border-white shadow-xl rounded-2xl p-6">
             <div className="bg-amber-100 p-3 rounded-xl mb-3">
               <Clock className="text-amber-600 w-6 h-6" />
@@ -201,7 +184,6 @@ export default function ClientDashboard() {
           </div>
         </div>
 
-        {/* ================= MIS SERVICIOS ================= */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -219,7 +201,6 @@ export default function ClientDashboard() {
             )}
           </div>
 
-          {/* SIN SERVICIOS */}
           {appointments.length === 0 && (
             <div className="text-center py-12">
               <Calendar className="w-16 h-16 text-gray-300 mx-auto mb-4" />
@@ -233,7 +214,6 @@ export default function ClientDashboard() {
             </div>
           )}
 
-          {/* LISTA DE SERVICIOS */}
           <div className="space-y-6">
             {appointments.map((appointment) => (
               <motion.div
@@ -242,37 +222,32 @@ export default function ClientDashboard() {
                 className="bg-white/80 border border-gray-200 shadow-sm hover:shadow-lg transition-all rounded-2xl p-6"
               >
                 <div className="flex flex-col md:flex-row justify-between gap-4">
-                  {/* ESTADO */}
                   <span
                     className={`px-3 py-1 text-xs rounded-full font-bold self-start ${
                       appointment.status === 'completed'
                         ? 'bg-emerald-100 text-emerald-700'
                         : appointment.status === 'scheduled'
                         ? 'bg-blue-100 text-blue-700'
-                        : appointment.status === 'in-progress'
-                        ? 'bg-amber-100 text-amber-700'
-                        : 'bg-red-100 text-red-700'
+                        : 'bg-gray-100 text-gray-700'
                     }`}
                   >
                     {appointment.status === 'completed'
                       ? 'Completado'
                       : appointment.status === 'scheduled'
                       ? 'Programado'
-                      : appointment.status === 'in-progress'
-                      ? 'En Progreso'
                       : 'Cancelado'}
                   </span>
 
-                  {/* FECHA */}
                   <p className="flex items-center gap-2 text-gray-600">
                     <Calendar className="w-4 h-4" />
-                    {new Date(String(appointment.date)).toLocaleString('es-MX', {
-                      dateStyle: 'medium',
-                      timeStyle: 'short',
-                    })}
+                    {appointment.date
+                      ? new Date(String(appointment.date)).toLocaleString('es-MX', {
+                          dateStyle: 'medium',
+                          timeStyle: 'short',
+                        })
+                      : 'Sin fecha'}
                   </p>
 
-                  {/* COSTO */}
                   <p className="text-2xl font-bold text-gray-900">${appointment.cost}</p>
                 </div>
               </motion.div>

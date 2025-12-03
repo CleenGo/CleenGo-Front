@@ -10,7 +10,7 @@ export default function ClientHomePage() {
       <Navbar />
 
       {/* Hero Section - Fondo azul con gradiente */}
-      <div className="min-h-screen bg-gradient-to-br from-[#0A65FF] via-[#1E73FF] to-[#3D8AFF] text-white flex items-center justify-center px-4">
+      <div className="min-h-screen bg-linear-to-br from-[#0A65FF] via-[#1E73FF] to-[#3D8AFF] text-white flex items-center justify-center px-4">
         <div className="max-w-4xl mx-auto text-center text-white">
           {/* Logo Card */}
           <div className="bg-white/20 backdrop-blur-lg rounded-3xl p-8 mb-8 border border-white/30 inline-block shadow-2xl transform hover:scale-105 transition-transform">
@@ -124,7 +124,7 @@ export default function ClientHomePage() {
               <div className="space-y-6">
                 {/* Step 1 */}
                 <div className="flex items-start gap-4">
-                  <div className="bg-blue-500 text-white rounded-2xl w-14 h-14 flex items-center justify-center flex-shrink-0">
+                  <div className="bg-blue-500 text-white rounded-2xl w-14 h-14 flex items-center justify-center shrink-0">
                     <span className="text-xl font-bold">01</span>
                   </div>
                   <div>
@@ -135,7 +135,7 @@ export default function ClientHomePage() {
 
                 {/* Step 2 */}
                 <div className="flex items-start gap-4">
-                  <div className="bg-blue-500 text-white rounded-2xl w-14 h-14 flex items-center justify-center flex-shrink-0">
+                  <div className="bg-blue-500 text-white rounded-2xl w-14 h-14 flex items-center justify-center shrink-0">
                     <span className="text-xl font-bold">02</span>
                   </div>
                   <div>
@@ -146,7 +146,7 @@ export default function ClientHomePage() {
 
                 {/* Step 3 */}
                 <div className="flex items-start gap-4">
-                  <div className="bg-blue-500 text-white rounded-2xl w-14 h-14 flex items-center justify-center flex-shrink-0">
+                  <div className="bg-blue-500 text-white rounded-2xl w-14 h-14 flex items-center justify-center shrink-0">
                     <span className="text-xl font-bold">03</span>
                   </div>
                   <div>
@@ -176,7 +176,7 @@ export default function ClientHomePage() {
               <div className="space-y-6">
                 {/* Step 1 */}
                 <div className="flex items-start gap-4">
-                  <div className="bg-cyan-500 text-white rounded-2xl w-14 h-14 flex items-center justify-center flex-shrink-0">
+                  <div className="bg-cyan-500 text-white rounded-2xl w-14 h-14 flex items-center justify-center shrink-0">
                     <span className="text-xl font-bold">01</span>
                   </div>
                   <div>
@@ -187,7 +187,7 @@ export default function ClientHomePage() {
 
                 {/* Step 2 */}
                 <div className="flex items-start gap-4">
-                  <div className="bg-cyan-500 text-white rounded-2xl w-14 h-14 flex items-center justify-center flex-shrink-0">
+                  <div className="bg-cyan-500 text-white rounded-2xl w-14 h-14 flex items-center justify-center shrink-0">
                     <span className="text-xl font-bold">02</span>
                   </div>
                   <div>
@@ -198,7 +198,7 @@ export default function ClientHomePage() {
 
                 {/* Step 3 */}
                 <div className="flex items-start gap-4">
-                  <div className="bg-cyan-500 text-white rounded-2xl w-14 h-14 flex items-center justify-center flex-shrink-0">
+                  <div className="bg-cyan-500 text-white rounded-2xl w-14 h-14 flex items-center justify-center shrink-0">
                     <span className="text-xl font-bold">03</span>
                   </div>
                   <div>
