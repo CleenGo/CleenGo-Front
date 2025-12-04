@@ -1,14 +1,30 @@
-import { Suspense } from "react";
-import CallbackClient from "./CallbackClient";
+"use client";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-export const fetchCache = "force-no-store";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 export default function OAuthCallbackPage() {
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const token = searchParams.get("token");
+    const role = searchParams.get("role");
+
+    if (token) {
+      localStorage.setItem("token", token);
+    }
+
+    if (role) {
+      localStorage.setItem("role", role);
+    }
+
+    // Redirige donde necesites (usando window.location)
+    window.location.href = "/";
+  }, [searchParams]);
+
   return (
-    <Suspense fallback={<div>Cargando...</div>}>
-      <CallbackClient />
-    </Suspense>
+    <div className="flex items-center justify-center min-h-screen">
+      Procesando autenticación...
+    </div>
   );
 }
