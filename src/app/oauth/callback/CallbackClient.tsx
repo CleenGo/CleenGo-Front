@@ -1,10 +1,5 @@
 "use client";
 
-export const dynamic = "force-dynamic";
-export const fetchCache = "force-no-store";
-export const revalidate = 0;
-export const prerender = false;
-export const dynamicParams = true;
 
 import { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
