@@ -23,12 +23,7 @@ dist-ssr/
 .env.*
 .env.*.local
 !.env.example
-.env.production
-.env.deveplopment
 
-.env.development
-.env.example
-.env.production
 
 # System files
 .DS_Store
