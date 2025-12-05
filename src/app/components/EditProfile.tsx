@@ -21,7 +21,6 @@ import {
   Upload,
   X,
 } from 'lucide-react';
-import { uploadProfileImage, deleteProfileImage } from '../lib/supabaseClient';
 
 // ============================================
 // INTERFACES
@@ -171,32 +170,62 @@ export default function EditProfile() {
     setError(null);
 
     try {
-      // Eliminar imagen anterior si existe
-      if (formData.profileImgUrl) {
-        await deleteProfileImage(formData.profileImgUrl);
+      console.log('📸 Starting image upload to backend...');
+      console.log('📁 File:', selectedFile.name, selectedFile.size, 'bytes');
+
+      const backendUrl = 'http://localhost:3000';
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+
+      console.log('⬆️ Uploading to backend endpoint...');
+
+      const response = await fetch(`${backendUrl}/file-upload/avatar/${user.id}`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+
+      console.log('📡 Upload response status:', response.status);
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => null);
+        console.error('❌ Upload error:', errorData);
+        throw new Error(errorData?.message || 'Error al subir la imagen');
       }
 
-      // Subir nueva imagen
-      const { url, error: uploadError } = await uploadProfileImage(selectedFile, user.id);
+      const data = await response.json();
+      const imageUrl = data.url || data.imageUrl || data.avatarUrl;
 
-      if (uploadError || !url) {
-        throw new Error(uploadError || 'Error al subir la imagen');
+      console.log('✅ Image uploaded successfully!');
+      console.log('🔗 Image URL:', imageUrl);
+
+      if (!imageUrl) {
+        throw new Error('El servidor no devolvió una URL de imagen');
       }
 
       // Actualizar formulario con la nueva URL
-      setFormData((prev) => ({ ...prev, profileImgUrl: url }));
+      setFormData((prev) => {
+        console.log('📝 Updating formData with new URL');
+        return { ...prev, profileImgUrl: imageUrl };
+      });
+
       setImagePreview(null);
       setSelectedFile(null);
 
       // Mostrar mensaje de éxito temporal
       const successMsg = document.createElement('div');
       successMsg.className =
-        'fixed top-4 right-4 bg-emerald-500 text-white px-6 py-3 rounded-xl shadow-lg z-50';
-      successMsg.textContent = '✓ Imagen subida correctamente';
+        'fixed top-4 right-4 bg-emerald-500 text-white px-6 py-3 rounded-xl shadow-lg z-50 flex items-center gap-2';
+      successMsg.innerHTML =
+        '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> <span>Imagen subida - Ahora guarda los cambios</span>';
       document.body.appendChild(successMsg);
-      setTimeout(() => successMsg.remove(), 3000);
+      setTimeout(() => successMsg.remove(), 5000);
+
+      console.log('💡 Remember to click "Guardar Cambios" to save profile!');
     } catch (err) {
-      console.error('Error uploading image:', err);
+      console.error('❌ Error uploading image:', err);
       setError(err instanceof Error ? err.message : 'Error al subir la imagen');
     } finally {
       setUploadingImage(false);
@@ -213,6 +242,9 @@ export default function EditProfile() {
     e.preventDefault();
 
     if (!user || !token) return;
+
+    console.log('💾 Starting form submission...');
+    console.log('📋 Current formData:', formData);
 
     setSaving(true);
     setError(null);
@@ -238,9 +270,12 @@ export default function EditProfile() {
       // Solo agregar profileImgUrl si no está vacío
       if (formData.profileImgUrl && formData.profileImgUrl.trim() !== '') {
         updateData.profileImgUrl = formData.profileImgUrl;
+        console.log('✅ Including profileImgUrl:', formData.profileImgUrl);
+      } else {
+        console.log('⚠️ No profileImgUrl to send (empty or undefined)');
       }
 
-      console.log('📤 Sending data:', updateData);
+      console.log('📤 Sending data to backend:', updateData);
 
       const response = await fetch(`${backendUrl}/user/update-profile/${user.id}`, {
         method: 'PUT',
@@ -261,7 +296,7 @@ export default function EditProfile() {
 
       setSuccess(true);
       setTimeout(() => {
-        router.push('/client/profile');
+        window.location.href = '/client/profile';
       }, 2000);
     } catch (err) {
       console.error('Error updating profile:', err);
