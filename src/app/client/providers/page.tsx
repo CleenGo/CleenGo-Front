@@ -34,8 +34,11 @@ export default function ProvidersPage() {
   const loadAllProviders = async () => {
     setLoading(true);
     try {
-      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3000";
+      const backendUrl = process.env.VITE_BACKEND_URL || "http://localhost:3000";
+      console.log(`url: ${backendUrl}`);
+      
       const response = await fetch(`${backendUrl}/provider`);
+      console.log(`url: ${response}`);
 
       if (!response.ok) {
         throw new Error("Error al cargar proveedores");
