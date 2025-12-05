@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +7,6 @@ import { AuthProvider } from "./contexts/AuthContext";
 export default function LandingPage() {
   return (
     <AuthProvider>
-
       {/* Hero Section */}
       <div className="min-h-screen bg-linear-to-br from-[#0A65FF] via-[#1E73FF] to-[#3D8AFF] text-white px-4 pt-32 pb-16">
         <div className="max-w-7xl mx-auto">
@@ -16,7 +15,11 @@ export default function LandingPage() {
             <div className="space-y-8">
               {/* Badge */}
               <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <svg
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
                 <span className="text-sm font-medium">
@@ -32,9 +35,10 @@ export default function LandingPage() {
                   brillante y limpio
                 </h1>
                 <p className="text-xl text-white/90 leading-relaxed">
-                  Conectamos a clientes con los mejores profesionales de limpieza.
+                  Conectamos a clientes con los mejores profesionales de
+                  limpieza.
                   <br />
-                  Rápido, confiable y al mejor precio.{' '}
+                  Rápido, confiable y al mejor precio.{" "}
                   <span className="font-semibold">¡Agenda en minutos!</span>
                 </p>
               </div>
@@ -72,7 +76,12 @@ export default function LandingPage() {
               <div className="grid grid-cols-3 gap-6 pt-8">
                 <div className="text-center">
                   <div className="flex items-center justify-center mb-2">
-                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg
+                      className="w-8 h-8"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -86,7 +95,11 @@ export default function LandingPage() {
                 </div>
                 <div className="text-center">
                   <div className="flex items-center justify-center mb-2">
-                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                    <svg
+                      className="w-8 h-8"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   </div>
@@ -95,7 +108,12 @@ export default function LandingPage() {
                 </div>
                 <div className="text-center">
                   <div className="flex items-center justify-center mb-2">
-                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg
+                      className="w-8 h-8"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -132,7 +150,9 @@ export default function LandingPage() {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-1 mb-2">
-                      <span className="font-bold text-lg">Servicio Premium</span>
+                      <span className="font-bold text-lg">
+                        Servicio Premium
+                      </span>
                     </div>
                     <div className="flex gap-1 mb-3">
                       {[...Array(5)].map((_, i) => (
@@ -147,10 +167,9 @@ export default function LandingPage() {
                       ))}
                     </div>
                     <p className="text-gray-600 leading-relaxed mb-3">
-                      &quot;¡Excelente servicio! Mi casa quedó impecable. Totalmente
-                      recomendado.&quot;
+                      &quot;¡Excelente servicio! Mi casa quedó impecable.
+                      Totalmente recomendado.&quot;
                     </p>
-                    <p className="text-sm text-gray-500 font-medium">María González</p>
                   </div>
                 </div>
               </div>
@@ -158,7 +177,12 @@ export default function LandingPage() {
               {/* Stats Card */}
               <div className="bg-linear-to-br from-[#2CC9C9] to-[#1E9B9B] text-white rounded-2xl p-8 shadow-2xl transform hover:scale-105 transition-transform">
                 <div className="flex items-center justify-center mb-4">
-                  <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg
+                    className="w-16 h-16"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -169,7 +193,9 @@ export default function LandingPage() {
                 </div>
                 <div className="text-center">
                   <div className="text-5xl font-bold mb-2">85%</div>
-                  <div className="text-xl font-semibold">Clientes satisfechos</div>
+                  <div className="text-xl font-semibold">
+                    Clientes satisfechos
+                  </div>
                 </div>
               </div>
 
@@ -219,7 +245,7 @@ export default function LandingPage() {
           {/* Section Header */}
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              ¿Por qué elegir{' '}
+              ¿Por qué elegir{" "}
               <span className="text-[#0c3055]">
                 Cleen<span className="text-[#22C55E]">Go</span>
               </span>
@@ -249,7 +275,9 @@ export default function LandingPage() {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">Rápido y Fácil</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                Rápido y Fácil
+              </h3>
               <p className="text-gray-600 leading-relaxed">
                 Agenda tu servicio en menos de 5 minutos
               </p>
@@ -272,7 +300,9 @@ export default function LandingPage() {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">100% Verificado</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                100% Verificado
+              </h3>
               <p className="text-gray-600 leading-relaxed">
                 Todos los proveedores pasan verificación rigurosa
               </p>
@@ -295,7 +325,9 @@ export default function LandingPage() {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">Mejor Precio</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                Mejor Precio
+              </h3>
               <p className="text-gray-600 leading-relaxed">
                 Compara y elige la mejor opción para ti
               </p>
@@ -318,7 +350,9 @@ export default function LandingPage() {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">Calidad Garantizada</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                Calidad Garantizada
+              </h3>
               <p className="text-gray-600 leading-relaxed">
                 Satisfacción garantizada o te devolvemos tu dinero
               </p>
@@ -335,7 +369,9 @@ export default function LandingPage() {
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
               3 pasos para tu hogar limpio
             </h2>
-            <p className="text-xl text-gray-600">Así de simple es usar CleenGo</p>
+            <p className="text-xl text-gray-600">
+              Así de simple es usar CleenGo
+            </p>
           </div>
 
           {/* Steps Grid */}
@@ -343,11 +379,11 @@ export default function LandingPage() {
             {/* Connector Lines */}
             <div
               className="hidden md:block absolute top-32 left-1/4 right-1/4 h-1 bg-linear-to-r from-[#0A65FF] to-[#2CC9C9]"
-              style={{ width: 'calc(50% - 2rem)', left: 'calc(25% + 2rem)' }}
+              style={{ width: "calc(50% - 2rem)", left: "calc(25% + 2rem)" }}
             ></div>
             <div
               className="hidden md:block absolute top-32 right-1/4 h-1 bg-linear-to-r from-[#0A65FF] to-[#2CC9C9]"
-              style={{ width: 'calc(25% - 2rem)', left: 'calc(50% + 2rem)' }}
+              style={{ width: "calc(25% - 2rem)", left: "calc(50% + 2rem)" }}
             ></div>
 
             {/* Step 1 - Calcula tu servicio */}
@@ -376,7 +412,8 @@ export default function LandingPage() {
                 Calcula tu servicio
               </h3>
               <p className="text-gray-600 leading-relaxed text-center">
-                Ingresa los detalles de tu espacio y selecciona los servicios que necesitas
+                Ingresa los detalles de tu espacio y selecciona los servicios
+                que necesitas
               </p>
             </div>
 
@@ -406,7 +443,8 @@ export default function LandingPage() {
                 Elige tu proveedor
               </h3>
               <p className="text-gray-600 leading-relaxed text-center">
-                Revisa perfiles, calificaciones y elige al profesional ideal para ti
+                Revisa perfiles, calificaciones y elige al profesional ideal
+                para ti
               </p>
             </div>
 
@@ -466,7 +504,9 @@ export default function LandingPage() {
           </div>
 
           {/* Heading */}
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">¿Listo para empezar?</h2>
+          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
+            ¿Listo para empezar?
+          </h2>
 
           {/* Subtitle */}
           <p className="text-xl text-white/90 mb-10 leading-relaxed">
@@ -506,7 +546,12 @@ export default function LandingPage() {
           {/* Features */}
           <div className="flex flex-wrap justify-center gap-8 text-white">
             <div className="flex items-center gap-2">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -517,7 +562,12 @@ export default function LandingPage() {
               <span className="font-medium">Sin compromiso</span>
             </div>
             <div className="flex items-center gap-2">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -534,7 +584,12 @@ export default function LandingPage() {
               <span className="font-medium">Garantía total</span>
             </div>
             <div className="flex items-center gap-2">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"

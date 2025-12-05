@@ -40,11 +40,7 @@ export default function Navbar() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d={
-                  isOpen
-                    ? "M6 18L18 6M6 6l12 12"
-                    : "M4 6h16M4 12h16M4 18h16"
-                }
+                d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
               />
             </svg>
           </button>
@@ -164,7 +160,8 @@ export default function Navbar() {
               </Link>
               <span className="text-gray-700 font-medium text-center">
                 ¡Hola,{" "}
-                <span className="text-teal-500 font-semibold">{user.name}</span>!
+                <span className="text-teal-500 font-semibold">{user.name}</span>
+                !
               </span>
               <button
                 onClick={logout}
@@ -240,7 +237,8 @@ export default function Navbar() {
               </Link>
               <span className="text-gray-700 font-medium text-center">
                 ¡Hola,{" "}
-                <span className="text-teal-500 font-semibold">{user.name}</span>!
+                <span className="text-teal-500 font-semibold">{user.name}</span>
+                !
               </span>
               <button
                 onClick={logout}
