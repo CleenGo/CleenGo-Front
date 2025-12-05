@@ -513,13 +513,13 @@ export default function RegisterProviderForm() {
 
           <div className="grid grid-cols-2 gap-2 mt-1">
             {[
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-              "Sunday",
+              "Lunes",
+              "Martes",
+              "Miércoles",
+              "Jueves",
+              "Viernes",
+              "Sábado",
+              "Domingo",
             ].map((day) => (
               <label key={day} className="flex items-center gap-2">
                 <input
