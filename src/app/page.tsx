@@ -1,13 +1,12 @@
 'use client';
 
-import Link from 'next/link';
-import Navbar from './components/Navbar';
-import { AuthProvider } from './contexts/AuthContext';
+import Image from "next/image";
+import Link from "next/link";
+import { AuthProvider } from "./contexts/AuthContext";
 
 export default function LandingPage() {
   return (
     <AuthProvider>
-      <Navbar />
 
       {/* Hero Section */}
       <div className="min-h-screen bg-linear-to-br from-[#0A65FF] via-[#1E73FF] to-[#3D8AFF] text-white px-4 pt-32 pb-16">
