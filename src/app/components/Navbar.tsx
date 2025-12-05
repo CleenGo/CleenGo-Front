@@ -2,13 +2,25 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "@/app/contexts/AuthContext";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
   const role = user?.role;
   const [isOpen, setIsOpen] = useState(false);
+
+  // 👇 NUEVO: controlar que el componente ya esté montado en el cliente
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Mientras React no ha hidratado en el cliente, no renderizamos el navbar
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <nav className="w-full bg-white shadow-md fixed top-0 left-0 z-50 border-b border-gray-100">
@@ -54,9 +66,7 @@ export default function Navbar() {
               : "hidden"
           }`}
         >
-          {/* ------------------- */}
-          {/* GUEST NAVBAR       */}
-          {/* ------------------- */}
+          {/* GUEST NAVBAR */}
           {!user && (
             <div className="flex flex-col lg:flex-row lg:items-center lg:gap-6 gap-3 w-full">
               <Link
@@ -92,9 +102,7 @@ export default function Navbar() {
             </div>
           )}
 
-          {/* ------------------- */}
-          {/* CLIENT NAVBAR      */}
-          {/* ------------------- */}
+          {/* CLIENT NAVBAR */}
           {user && role === "client" && (
             <div className="flex flex-col lg:flex-row lg:items-center lg:gap-6 gap-3 w-full">
               <Link
@@ -172,9 +180,7 @@ export default function Navbar() {
             </div>
           )}
 
-          {/* ------------------- */}
-          {/* PROVIDER NAVBAR    */}
-          {/* ------------------- */}
+          {/* PROVIDER NAVBAR */}
           {user && role === "provider" && (
             <div className="flex flex-col lg:flex-row lg:items-center lg:gap-6 gap-3 w-full">
               <Link
