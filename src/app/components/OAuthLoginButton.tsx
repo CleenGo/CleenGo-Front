@@ -10,7 +10,7 @@ export default function OAuthLoginButton({ role }: OAuthLoginButtonProps) {
   const googleLogo = "https://www.svgrepo.com/show/475656/google-color.svg";
 
   const handleGoogleLogin = async () => {
-    // 🔥 window SOLO se usa dentro del handler (client-safe)
+    // window solo dentro del handler (safe)
     const redirectURL = `${window.location.origin}/oauth/callback?role=${role}`;
 
     const { error } = await supabase.auth.signInWithOAuth({
@@ -25,6 +25,7 @@ export default function OAuthLoginButton({ role }: OAuthLoginButtonProps) {
 
   return (
     <button
+      type="button" // ⬅️ EVITA EL SUBMIT ACCIDENTAL DEL FORMULARIO
       onClick={handleGoogleLogin}
       className="w-full border px-4 py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-100 transition"
     >
