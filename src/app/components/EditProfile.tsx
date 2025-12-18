@@ -49,7 +49,7 @@ interface UserProfileForm {
 // COMPONENTE
 // ============================================
 export default function EditProfile() {
-  const { user, token, logout } = useAuth();
+  const { user, token, logout, updateUser } = useAuth();
   const router = useRouter();
 
   const [loading, setLoading] = useState(true);
@@ -210,6 +210,9 @@ export default function EditProfile() {
 
       setFormData((prev) => ({ ...prev, profileImgUrl: imageUrl }));
 
+      // Actualizar el contexto inmediatamente con la nueva imagen
+      updateUser({ profileImgUrl: imageUrl });
+
       setImagePreview(null);
       setSelectedFile(null);
     } catch (err) {
@@ -306,10 +309,17 @@ export default function EditProfile() {
         throw new Error(errorData?.message || `Error al actualizar el perfil (${response.status})`);
       }
 
+      // Actualizar el contexto de autenticación con los nuevos datos
+      updateUser({
+        name: formData.name,
+        surname: formData.surname,
+        profileImgUrl: formData.profileImgUrl || undefined,
+      });
+
       setSuccess(true);
       setTimeout(() => {
         window.location.href = '/client/profile';
-      }, 2000);
+      }, 1500);
     } catch (err) {
       console.error('Error updating profile:', err);
       setError(err instanceof Error ? err.message : 'Error al guardar los cambios');

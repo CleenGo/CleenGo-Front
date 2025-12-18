@@ -17,31 +17,30 @@ interface AuthContextType {
   token: string | null;
   login: (user: AuthUser | Record<string, unknown>, token: string) => void;
   logout: () => void;
+  updateUser: (updates: Partial<User>) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(() => {
-    if (typeof window === 'undefined') return null;
-
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      try {
-        return JSON.parse(storedUser);
-      } catch (err) {
-        console.error('Error parsing stored user:', err);
-        localStorage.removeItem('user');
-        return null;
-      }
-    }
+function getInitialUser(): User | null {
+  if (typeof window === 'undefined') return null;
+  const storedUser = localStorage.getItem('user');
+  if (!storedUser) return null;
+  try {
+    return JSON.parse(storedUser);
+  } catch {
     return null;
-  });
+  }
+}
 
-  const [token, setToken] = useState<string | null>(() => {
-    if (typeof window === 'undefined') return null;
-    return localStorage.getItem('token');
-  });
+function getInitialToken(): string | null {
+  if (typeof window === 'undefined') return null;
+  return localStorage.getItem('token');
+}
+
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const [user, setUser] = useState<User | null>(getInitialUser);
+  const [token, setToken] = useState<string | null>(getInitialToken);
 
   // Sincronizar cambios de storage en otras ventanas
   useEffect(() => {
@@ -98,8 +97,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const updateUser = (updates: Partial<User>) => {
+    if (!user) return;
+
+    const updatedUser = { ...user, ...updates };
+    setUser(updatedUser);
+
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, token, login, logout, updateUser }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 
