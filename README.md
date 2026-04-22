@@ -5,6 +5,14 @@
 
 [Navbar]<img width="1328" height="369" alt="image" src="https://github.com/user-attachments/assets/e7de220c-9fb8-47c1-bc02-eec0e6bdc340" />
 
+[Dashboard] <img width="1317" height="507" alt="image" src="https://github.com/user-attachments/assets/c9d2f4f3-7aa3-43b0-94c8-73686bd708a9" />
+
+[Login] <img width="860" height="525" alt="image" src="https://github.com/user-attachments/assets/543ae402-1cd9-4779-b523-692e77ed47c9" />
+
+[Register] <img width="723" height="550" alt="image" src="https://github.com/user-attachments/assets/83ca99ee-dc4d-4934-abb2-ae061225af44" />
+
+
+
 ```md
 # 💚 CleenGo – Frontend (React + Vite)
 
