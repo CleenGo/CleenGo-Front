@@ -11,6 +11,15 @@
 
 [Register] <img width="723" height="550" alt="image" src="https://github.com/user-attachments/assets/83ca99ee-dc4d-4934-abb2-ae061225af44" />
 
+##  Mi contribución al proyecto
+
+Este fue un proyecto grupal desarrollado durante un bootcamp.  
+Mi enfoque principal estuvo en el desarrollo frontend y la experiencia de usuario, incluyendo:
+
+- Diseño e implementación de la Navbar
+- Desarrollo de dashboards por rol (cliente, proveedor, admin)
+- Creación de formularios para cada tipo de usuario
+- Implementación de lógica de protección de rutas basada en roles
 
 
 ```md
